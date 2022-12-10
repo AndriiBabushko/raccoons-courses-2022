@@ -1,7 +1,7 @@
 <?php
 spl_autoload_register(function ($className) {
     $path = $className . ".php";
-    include($path);
+    include_once($path);
 });
 
 $core = core\Core::getInstance();

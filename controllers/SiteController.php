@@ -2,18 +2,33 @@
 
 namespace controllers;
 
-class SiteController
+use core\Controller;
+
+class SiteController extends Controller
 {
-    public function indexAction()
+    public function __construct()
     {
-        echo "Main page";
+        parent::__construct();
     }
 
-    public function errorAction($code){
+    public function indexAction(): bool|string
+    {
+        return $this->render();
+    }
+
+    public function settingsAction(): bool|string
+    {
+        return $this->render();
+    }
+
+    public function errorAction($code): bool|string
+    {
         switch ($code){
             case 404: {
-                echo 'Error 404. Page not found!';
-                break;
+                return $this->render(null, ['error_message' => 'Error 404. Page not found!']);
+            }
+            default:{
+                return $this->render(null, ['error_message' => 'Something went wrong']);
             }
         }
     }

@@ -10,7 +10,8 @@ class Controller
     {
         $moduleName = \core\Core::getInstance()->app['moduleName'];
         $actionName = \core\Core::getInstance()->app['actionName'];
-        $this->viewPath = "views/{$moduleName}/{$actionName}.php";
+        $language = \core\Core::getInstance()->app['language'];
+        $this->viewPath = "views/{$moduleName}/{$language}/{$actionName}.php";
     }
 
     public function render($viewPath = null, $params = null): bool|string
