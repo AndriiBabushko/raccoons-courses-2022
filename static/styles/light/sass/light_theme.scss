@@ -1,4 +1,4 @@
-@import "variables", "flags";
+@import "variables";
 
 // total styles
 *, *:before, *:after {
@@ -8,13 +8,88 @@
 }
 
 .header {
-  background-color: $middle_grey
+  background-color: $light_grey
 }
 
 .footer {
-  background-color: $middle_grey;
+  background-color: $light_grey;
 }
+
 // end total styles
+
+
+// settings styles
+
+#settingsMenu {
+  // background-color: $post_grey;
+  border-right: 2px solid $light_grey;
+}
+
+#settingsItem, #userBlock {
+  border-bottom: 2px solid $light_grey;
+}
+
+#avatarImg {
+  -webkit-box-shadow: 0px 0px 42px -8px $light_shadow;
+  -moz-box-shadow: 0px 0px 42px -8px $light_shadow;
+  box-shadow: 0px 0px 42px -8px $light_shadow;
+  width: 75px;
+  height: 75px;
+}
+
+.nav-pills .nav-link {
+  border-radius: 0 !important;
+}
+
+.activeItem {
+  background-color: $light_grey !important;
+  color: white !important;
+}
+
+.form-control:focus {
+  border-color: $post_grey;
+  box-shadow: 0 0 0 0.2rem $light_grey;
+}
+
+.form-group {
+  width: 45% !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  display: inline-block !important;
+}
+
+#textareaGroup{
+  width: 100% !important;
+}
+
+@media (min-width: 0px) and (max-width: 576px) {
+  #avatarImg {
+    width: 30px;
+    height: 30px;
+  }
+
+  #contentContainer {
+    padding: 5px !important;
+  }
+
+  .form-group {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  #avatarImg {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+// end settings styles
+
 
 // form styles
 body {
@@ -300,4 +375,5 @@ input {
     right: 5px;
   }
 }
+
 // end form styles
