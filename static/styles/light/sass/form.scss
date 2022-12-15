@@ -1,0 +1,92 @@
+@import "variables";
+
+// form styles
+.title {
+  border-bottom: 2px solid $light_grey;
+}
+
+.label {
+  font-size: 24px;
+  font-weight: bold;
+  display: inline-block !important;
+}
+
+.form-group {
+  width: 100% !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-control {
+  border-width: 3px;
+}
+
+.showPassword {
+  cursor: pointer;
+}
+
+.form-control:focus {
+  border-color: $post_grey;
+  box-shadow: 0 0 0 0.2rem $light_grey;
+}
+
+.invalid-feedback {
+  font-weight: 500;
+}
+
+#formImg {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: block;
+  background-image: url('/static/img/light_programming_languages_pattern.png');
+  background-size: cover;
+  background-position: center;
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+  z-index: 1;
+  border-radius: 10%;
+}
+
+#content {
+  position: relative;
+  z-index: 2;
+  background-color: transparent;
+  width: 75%;
+}
+
+#registerForm {
+  border: 3px solid $post_grey;
+  border-radius: 5%;
+  margin: 10px;
+  width: 50%;
+}
+
+@media (min-width: 0px) and (max-width: 576px) {
+  #registerForm {
+    width: 90%;
+    border-radius: 0;
+  }
+
+  #content {
+    width: 85%;
+  }
+
+  #formImg {
+    filter: blur(1px);
+    -webkit-filter: blur(1px);
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  #registerForm {
+    width: 80%;
+    border-radius: 0;
+  }
+
+  #content {
+    width: 95%;
+  }
+}
+// end form styles

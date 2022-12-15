@@ -1,0 +1,86 @@
+#settingsMenu {
+  border-right: 2px solid lightgrey;
+}
+
+#settingsItem, #userBlock {
+  border-bottom: 2px solid lightgrey;
+}
+
+#avatarImg {
+  -webkit-box-shadow: 0px 0px 42px -8px #212121;
+  -moz-box-shadow: 0px 0px 42px -8px #212121;
+  box-shadow: 0px 0px 42px -8px #212121;
+  width: 75px;
+  height: 75px;
+}
+
+.nav-pills .nav-link {
+  border-radius: 0 !important;
+}
+
+.activeItem {
+  background-color: lightgrey !important;
+  color: white !important;
+}
+
+.form-control:focus {
+  border-color: #a1a1a1;
+  box-shadow: 0 0 0 0.2rem lightgrey;
+}
+
+.form-group, .settings_group {
+  width: 45% !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  display: inline-block !important;
+}
+
+#buttonGroup {
+  margin: 25px 0;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+#textareaGroup, #buttonGroup {
+  width: 100% !important;
+}
+
+#textButtonLogout {
+  width: 100% !important;
+}
+
+@media (min-width: 0px) and (max-width: 576px) {
+  #avatarImg {
+    width: 30px;
+    height: 30px;
+  }
+  #contentContainer {
+    padding: 5px !important;
+  }
+  #buttonUpdate, #buttonCancel, #buttonLogout {
+    width: 100% !important;
+    margin: 5px 0;
+  }
+  .form-group {
+    width: 100% !important;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  #avatarImg {
+    width: 50px;
+    height: 50px;
+  }
+  #buttonUpdate, #buttonCancel, #buttonLogout {
+    width: 100% !important;
+    margin: 5px 0;
+  }
+}
+
+/*# sourceMappingURL=settings.css.map */

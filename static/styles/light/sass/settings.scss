@@ -1,0 +1,98 @@
+@import "variables";
+
+// settings styles
+
+#settingsMenu {
+  border-right: 2px solid $light_grey;
+}
+
+#settingsItem, #userBlock {
+  border-bottom: 2px solid $light_grey;
+}
+
+#avatarImg {
+  -webkit-box-shadow: 0px 0px 42px -8px $light_shadow;
+  -moz-box-shadow: 0px 0px 42px -8px $light_shadow;
+  box-shadow: 0px 0px 42px -8px $light_shadow;
+  width: 75px;
+  height: 75px;
+}
+
+.nav-pills .nav-link {
+  border-radius: 0 !important;
+}
+
+.activeItem {
+  background-color: $light_grey !important;
+  color: white !important;
+}
+
+.settings-group {
+  width: 45% !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#appearanceSettingsMenu {
+  width: 100%;
+}
+
+#buttonGroup {
+  margin: 25px 0;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+#buttonUpdate {
+  margin-right: 5px;
+}
+
+#buttonCancel {
+  margin-left: 5px;
+}
+
+#textareaGroup, #buttonGroup {
+  width: 100% !important;
+}
+
+#textButtonLogout, #textLanguageDropdown {
+  width: 100% !important;
+}
+
+@media (min-width: 0px) and (max-width: 576px) {
+  #avatarImg {
+    width: 30px;
+    height: 30px;
+  }
+
+  #contentContainer {
+    padding: 5px !important;
+  }
+
+  #buttonUpdate, #buttonCancel, #buttonLogout {
+    width: 100% !important;
+    margin: 5px 0 !important;
+  }
+
+  .settings-group {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  #avatarImg {
+    width: 50px;
+    height: 50px;
+  }
+
+  #buttonUpdate, #buttonCancel, #buttonLogout {
+    width: 100% !important;
+    margin: 5px 0 !important;
+  }
+}
+
+// end settings styles
