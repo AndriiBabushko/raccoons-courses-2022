@@ -34,20 +34,28 @@ class Core
             $route = $_GET['route'];
             $routeParts = explode('/', $route);
             $moduleName = strtolower(array_shift($routeParts));
+            $language = strtolower(array_shift($routeParts));
             $actionName = strtolower(array_shift($routeParts));
         }
 
-        if (empty($moduleName) || empty($actionName)) {
+        if (empty($moduleName) || empty($actionName) || empty($language)) {
             $moduleName = 'site';
+            $language = 'eng';
             $actionName = 'index';
         }
 
+        if (isset($_GET['language']))
+            $language = $_GET['language'];
+
+        $theme = 'light';
+        if (isset($_GET['theme']))
+            $theme = $_GET['theme'];
+
         $this->app['moduleName'] = $moduleName;
         $this->app['actionName'] = $actionName;
-        if(isset($_GET['language']))
-            $this->app['language'] = $_GET['language'];
-        else
-            $this->app['language'] = 'eng';
+        $this->app['language'] = $language;
+        $this->app['theme'] = $theme;
+
 
         $controllerName = '\\controllers\\' . ucfirst($moduleName) . 'Controller';
         $controllerActionName = $actionName . 'Action';
@@ -57,7 +65,7 @@ class Core
             $controller = new $controllerName();
             if (method_exists($controller, $controllerActionName)) {
                 $this->app['actionResult'] = $controller->$controllerActionName();
-                $this->app['pageTitle'] = 'Raccoons Courses - ' . ucfirst($moduleName);
+                $this->app['pageTitle'] = 'Raccoons Courses - ' . ucfirst($actionName);
             } else {
                 $statusCode = 404;
             }
@@ -77,10 +85,12 @@ class Core
 
     public function done(): void
     {
-        $pathToLayout = "themes/light/layout.php";
+        $pathToLayout = "themes/{$this->app['theme']}/layout.php";
 
         $templateMaker = new TemplateMaker($pathToLayout);
         $templateMaker->setParam('content', $this->app['actionResult']);
+        $templateMaker->setParam('language', $this->app['language']);
+        $templateMaker->setParam('theme', $this->app['theme']);
         $templateMaker->setParam('title', $this->app['pageTitle']);
         $html = $templateMaker->getHTML();
 

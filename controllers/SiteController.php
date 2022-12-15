@@ -18,7 +18,7 @@ class SiteController extends Controller
 
     public function settingsAction(): bool|string
     {
-        return $this->render();
+        return $this->render(null, ['language' => $this->language, 'theme' => $this->theme]);
     }
 
     public function errorAction($code): bool|string

@@ -20,4 +20,14 @@ class UserController extends Controller
     {
         return $this->render();
     }
+
+    public function loginAction(): bool|string
+    {
+        return $this->render();
+    }
+
+    public function registerAction(): bool|string
+    {
+        return $this->render();
+    }
 }
