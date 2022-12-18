@@ -11,12 +11,12 @@ class CoursesController extends Controller
         parent::__construct();
     }
 
-    public function indexAction(): bool|string
+    public function viewAction(): bool|string
     {
         return $this->render();
     }
 
-    public function viewAction(): bool|string
+    public function adminPageAction(): bool|string
     {
         return $this->render();
     }
