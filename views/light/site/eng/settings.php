@@ -122,7 +122,7 @@
                                 }
                                 ?>
                                 <div id="bioHelpBlock" class="form-text text-wrap">
-                                    Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                                    This is your bio. You can write here any information about yourself.
                                 </div>
                             </div>
 
