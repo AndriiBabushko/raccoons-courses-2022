@@ -14,6 +14,8 @@
     <!--    ====================================================================================================================-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <!--    ====================================================================================================================-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <!--    ====================================================================================================================-->
     <link rel="stylesheet" href="/static/styles/light/css/light_theme.css?v=<?php echo time(); ?>">
     <!--    ====================================================================================================================-->
 </head>
@@ -21,7 +23,7 @@
 <header class="header">
     <nav class="navbar navbar-expand-lg navbar-light navbar-bg">
         <div class="container">
-            <img src="/static/img/raccoon-logo-1.png" alt="logo" width="50" height="50" class="img-fluid">
+            <img src="/static/img/raccoon-logo-1.png" alt="logo" width="50" height="50" class="img-fluid" id="headerLogo">
             <?php
             if (empty($language)) {
                 echo "
@@ -39,16 +41,45 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class='nav-item'>
-                        <a class='nav-link' href='#'>Courses</a>
-                    </li>
                     <?php
                     if (true) {
-                        echo "
-                        <li class='nav-item'>
-                            <a class='nav-link' href='#'>Admin page</a>
-                        </li>
-                        ";
+                        if(empty($language)) {
+                            echo "
+                            <li class='nav-item'>
+                                <a class='nav-link' href='/courses/eng/view'>Courses</a>
+                            </li>
+                            ";
+                            echo "
+                            <li class='nav-item'>
+                                <a class='nav-link' href='/courses/eng/adminPage'>Admin page</a>
+                            </li>
+                            ";
+                        } else {
+                            echo "
+                            <li class='nav-item'>
+                                <a class='nav-link' href='/courses/$language/view'>Courses</a>
+                            </li>
+                            ";
+                            echo "
+                            <li class='nav-item'>
+                                <a class='nav-link' href='/courses/$language/adminPage'>Admin page</a>
+                            </li>
+                            ";
+                        }
+                    } else {
+                        if(empty($language)) {
+                            echo "
+                            <li class='nav-item'>
+                                <a class='nav-link' href='/courses/eng/view'>Courses</a>
+                            </li>
+                            ";
+                        } else {
+                            echo "
+                            <li class='nav-item'>
+                                <a class='nav-link' href='/courses/$language/view'>Courses</a>
+                            </li>
+                            ";
+                        }
                     }
                     ?>
                 </ul>
@@ -220,6 +251,7 @@
     </div>
     <!-- Copyright -->
 </footer>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous">
