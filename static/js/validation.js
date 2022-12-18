@@ -30,13 +30,12 @@ const validateInput = (input, unnecessaryInput = null) => {
                         return false;
 
                 if (input.getAttribute('type') === 'email' || input.getAttribute('name') === 'email')
-                    if (input.value.trim().match(/^([a-zA-Z0-9_\-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(]?)$/) === null)
+                    if (!input.value.trim().match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/))
                         return false;
 
                 if (input.getAttribute('type') === 'tel' || input.getAttribute('name') === 'phoneNumber')
-                    if (input.value.trim().match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im) === null)
+                    if (!input.value.trim().match(/^\+?([0-9]{2})\)?[-. ]?([0-9]{3})\)?[-.]?([0-9]{3})[-.]?([0-9]{4})$/))
                         return false;
-
             }
         } else {
             if (input.getAttribute('type') === 'password' && unnecessaryInput.getAttribute('type') === 'password') {
