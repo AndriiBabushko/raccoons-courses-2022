@@ -7,7 +7,9 @@ use controllers\SiteController;
 class Core
 {
     private static $instance = null;
-    public $app;
+    public array $app;
+    public DB $db;
+    public string $requestMethod;
 
     private function __construct()
     {
@@ -25,7 +27,8 @@ class Core
 
     public function initialize(): void
     {
-
+        $this->db = new DB(DATABASE_HOST, DATABASE_LOGIN, DATABASE_PASSWORD, DATABASE_BASENAME);
+        $this->requestMethod = $_SERVER['REQUEST_METHOD'];
     }
 
     public function run(): void
