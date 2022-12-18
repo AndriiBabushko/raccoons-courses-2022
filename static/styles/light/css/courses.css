@@ -1,0 +1,15 @@
+#itemsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 576px) {
+  #itemsContainer {
+    justify-content: space-between;
+  }
+}
+
+/*# sourceMappingURL=courses.css.map */

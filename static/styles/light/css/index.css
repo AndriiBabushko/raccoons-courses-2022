@@ -1,0 +1,24 @@
+.programming-languages-container {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.programming-language-container {
+  border: 1px solid black;
+  border-radius: 50%;
+  background-color: lightgrey;
+  animation-name: smooth-appearance;
+  animation-duration: 1s;
+}
+
+@keyframes smooth-appearance {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+/*# sourceMappingURL=index.css.map */

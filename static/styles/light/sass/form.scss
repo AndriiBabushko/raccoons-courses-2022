@@ -26,9 +26,22 @@
   cursor: pointer;
 }
 
-.form-control:focus {
-  border-color: $post_grey;
-  box-shadow: 0 0 0 0.2rem $light_grey;
+.form-control {
+  &:focus {
+    border-color: $post_grey;
+    box-shadow: 0 0 0 0.2rem $light_grey;
+  }
+}
+
+.form-select {
+  &:focus {
+    border-color: $post_grey;
+    box-shadow: 0 0 0 0.2rem $light_grey;
+  }
+
+  option {
+    // ...
+  }
 }
 
 .invalid-feedback {
@@ -63,6 +76,10 @@
   width: 50%;
 }
 
+#buttonRegister {
+  width: 100%;
+}
+
 @media (min-width: 0px) and (max-width: 576px) {
   #registerForm {
     width: 90%;
@@ -89,4 +106,13 @@
     width: 95%;
   }
 }
+
+@media (min-width: 768px) and (max-width: 992px) {
+
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+
+}
+
 // end form styles
