@@ -2,10 +2,12 @@
 
 // start category styles
 
-@media (min-width: 0px) and (max-width: 768px) {
-  #cardsBlock {
-    flex-direction: column !important;
-    @include horizontalBlockScrollBar;
+.card {
+  transition-duration: 0.5s;
+
+  &:hover {
+    background-color: $light_grey;
+    transform: scale(0.95);
   }
 }
 
