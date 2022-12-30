@@ -2,15 +2,15 @@
 /**
  * @var array $errors
  * @var array $model
+ * @var bool $registerSuccessful
  */
 ?>
 
 <div class="row">
     <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 w-100 position-relative">
         <div class="form-container d-flex justify-content-center" id="formContainer">
-            <form action="" method="post" enctype="multipart/form-data" class="d-flex flex-column align-items-center justify-content-center position-relative py-3"
-                  id="registerForm">
-                <div id="formImg"></div>
+            <form action="" method="post" enctype="multipart/form-data" class="d-flex flex-column align-items-center justify-content-center position-relative py-3" id="authForm">
+                <div id="authImg"></div>
 
                 <div class="" id="content">
                     <h3 class="h3 my-2 text-center title">Join to our Raccoons' team!</h3>
