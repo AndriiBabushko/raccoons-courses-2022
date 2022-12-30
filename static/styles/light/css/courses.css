@@ -1,3 +1,7 @@
+#searchBlock {
+  overflow-y: hidden;
+}
+
 #itemsContainer {
   display: flex;
   flex-direction: row;

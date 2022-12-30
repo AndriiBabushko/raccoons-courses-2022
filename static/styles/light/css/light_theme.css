@@ -80,16 +80,8 @@
   border-right: 2px solid lightgrey;
 }
 
-#settingsItem, #userBlock {
+.settings-item, #userBlock {
   border-bottom: 2px solid lightgrey;
-}
-
-#avatarImg {
-  -webkit-box-shadow: 0px 0px 42px -8px #212121;
-  -moz-box-shadow: 0px 0px 42px -8px #212121;
-  box-shadow: 0px 0px 42px -8px #212121;
-  width: 75px;
-  height: 75px;
 }
 
 .nav-pills .nav-link {
@@ -99,6 +91,53 @@
 .activeItem {
   background-color: lightgrey !important;
   color: white !important;
+}
+
+#userAvatar {
+  text-align: center;
+}
+#userAvatar input[type=file] {
+  display: none;
+}
+
+#userAvatarBlock {
+  position: relative;
+  margin: 10px;
+}
+
+#avatarImg {
+  cursor: pointer;
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  transition: all ease-in-out 0.3s;
+}
+#avatarImg :hover {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+#figCaption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0);
+  transition: all ease-in-out 0.3s;
+}
+#figCaption:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#figCaption i {
+  font-size: 48px;
 }
 
 .settings-group {
@@ -113,11 +152,11 @@
 }
 
 #buttonGroup {
-  margin: 25px 0;
+  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
 }
 
@@ -125,7 +164,11 @@
   margin-right: 5px;
 }
 
-#buttonCancel {
+#buttonDelete {
+  margin: 0 5px;
+}
+
+#buttonClear {
   margin-left: 5px;
 }
 
@@ -142,10 +185,17 @@
     width: 30px;
     height: 30px;
   }
+  #figCaption {
+    width: 30px;
+    height: 30px;
+  }
+  #figCaption i {
+    font-size: 24px;
+  }
   #contentContainer {
     padding: 5px !important;
   }
-  #buttonUpdate, #buttonCancel, #buttonLogout {
+  #buttonUpdate, #buttonClear, #buttonDelete, #buttonLogout {
     width: 100% !important;
     margin: 5px 0 !important;
   }
@@ -155,81 +205,47 @@
 }
 @media (min-width: 576px) and (max-width: 768px) {
   #avatarImg {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
   }
-  #buttonUpdate, #buttonCancel, #buttonLogout {
+  #figCaption {
+    width: 60px;
+    height: 60px;
+  }
+  #figCaption i {
+    font-size: 36px;
+  }
+  #buttonUpdate, #buttonClear, #buttonDelete, #buttonLogout {
     width: 100% !important;
     margin: 5px 0 !important;
   }
 }
-.title {
-  border-bottom: 2px solid lightgrey;
-}
-
-.label {
-  font-size: 24px;
-  font-weight: bold;
-  display: inline-block !important;
-}
-
-.form-group {
-  width: 100% !important;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.form-control {
-  border-width: 3px;
-}
-
 .showPassword {
   cursor: pointer;
 }
 
-.form-control:focus {
-  border-color: #a1a1a1;
-  box-shadow: 0 0 0 0.2rem lightgrey;
-}
-
-.form-select:focus {
-  border-color: #a1a1a1;
-  box-shadow: 0 0 0 0.2rem lightgrey;
-}
-.invalid-feedback {
-  font-weight: 500;
-}
-
-#formImg {
+#authImg {
   height: 100%;
   width: 100%;
   position: absolute;
   display: block;
-  background-image: url("/static/img/light_programming_languages_pattern.png");
   background-size: cover;
   background-position: center;
   filter: blur(2px);
   -webkit-filter: blur(2px);
   z-index: 1;
   border-radius: 10%;
+  background-image: url("/static/img/site/light_programming_languages_pattern.png");
 }
 
-#content {
-  position: relative;
-  z-index: 2;
-  background-color: transparent;
-  width: 75%;
-}
-
-#registerForm {
+#authForm {
   border: 3px solid #a1a1a1;
   border-radius: 5%;
   margin: 10px;
   width: 50%;
 }
 
-#buttonRegister {
+#buttonRegister, #buttonLogin {
   width: 100%;
 }
 
@@ -241,7 +257,7 @@
   #content {
     width: 85%;
   }
-  #formImg {
+  #authImg {
     filter: blur(1px);
     -webkit-filter: blur(1px);
   }
@@ -255,6 +271,122 @@
     width: 95%;
   }
 }
+.title {
+  border-bottom: 2px solid lightgrey;
+}
+
+.label {
+  font-size: 24px;
+  font-weight: bold;
+  display: inline-block !important;
+}
+
+textarea {
+  max-height: 500px;
+}
+
+.form-group {
+  width: 100% !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-control {
+  border-width: 3px;
+}
+
+.form-control:focus {
+  border-color: #a1a1a1;
+  box-shadow: 0 0 0 0.2rem lightgrey;
+}
+
+.form-select:focus {
+  border-color: #a1a1a1;
+  box-shadow: 0 0 0 0.2rem lightgrey;
+}
+
+.invalid-feedback {
+  font-weight: 500;
+}
+
+#content {
+  position: relative;
+  z-index: 2;
+  background-color: transparent;
+  width: 75%;
+}
+
+#categoryFormImg {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: block;
+  background-size: cover;
+  background-position: center;
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+  z-index: 1;
+  border-radius: 10%;
+  background-image: url("/static/img/category/form_pattern_2.jpg");
+  filter: blur(1px);
+  -webkit-filter: blur(1px);
+}
+
+#categoryAddForm, #categoryUpdateForm, #categoryDeleteForm {
+  border: 3px solid #a1a1a1;
+  border-radius: 5%;
+  margin: 10px;
+  width: 50%;
+}
+
+#buttonAddCategory, #buttonUpdateCategory {
+  width: 100%;
+}
+
+@media (min-width: 0px) and (max-width: 576px) {
+  #categoryAddForm, #categoryUpdateForm, #categoryDeleteForm {
+    width: 90%;
+    border-radius: 0;
+  }
+  #content {
+    width: 85%;
+  }
+  #categoryFormImg {
+    filter: blur(1px);
+    -webkit-filter: blur(1px);
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  #categoryAddForm, #categoryUpdateForm, #categoryDeleteForm {
+    width: 80%;
+    border-radius: 0;
+  }
+  #content {
+    width: 95%;
+  }
+}
+#itemsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 576px) {
+  #itemsContainer {
+    justify-content: space-between;
+  }
+}
+.card {
+  transition-duration: 0.5s;
+}
+.card:hover {
+  background-color: lightgrey;
+  transform: scale(0.95);
+}
+
 *, *:before, *:after {
   box-sizing: border-box;
   padding: 0;
@@ -263,6 +395,22 @@
 
 .header {
   background-color: lightgrey;
+}
+
+.dropdown-item:focus {
+  background-color: #a1a1a1;
+}
+
+.nav-link {
+  height: 100%;
+}
+
+.nav-block {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .footer {
