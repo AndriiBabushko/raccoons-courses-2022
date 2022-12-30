@@ -3,6 +3,8 @@
 namespace controllers;
 
 use core\Controller;
+use models\Good;
+use models\User;
 
 class CoursesController extends Controller
 {
@@ -11,13 +13,40 @@ class CoursesController extends Controller
         parent::__construct();
     }
 
-    public function viewAction(): bool|string
+    public function indexAction(): bool|string
+    {
+        $goods = Good::getGoods();
+        return $this->render(null, [
+            'goods' => $goods
+        ]);
+    }
+
+    public function cartAction(): bool|string
     {
         return $this->render();
     }
 
-    public function adminPageAction(): bool|string
+    public function addAction(): \models\Error|bool|string
     {
+        if(!User::isAdmin())
+            return $this->error(403);
+
+        return $this->render();
+    }
+
+    public function updateAction(): \models\Error|bool|string
+    {
+        if(!User::isAdmin())
+            return $this->error(403);
+
+        return $this->render();
+    }
+
+    public function deleteAction(): \models\Error|bool|string
+    {
+        if(!User::isAdmin())
+            return $this->error(403);
+
         return $this->render();
     }
 }
