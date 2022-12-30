@@ -13,7 +13,7 @@ const unhiddenSelector = (selector) => {
 }
 
 
-const menuItems = document.querySelectorAll('#settingsItem');
+const menuItems = document.querySelectorAll('.settings-item');
 const divAccountSettings = document.querySelector('#accountSettings');
 const divAppearanceSettings = document.querySelector('#appearanceSettings');
 const divLogoutSettings = document.querySelector('#logoutSettings');
@@ -24,19 +24,25 @@ for (let i = 0; i < menuItems.length; i++) {
 }
 activeItems[0] = true;
 
-unhiddenSelector(divAccountSettings);
-hiddenSelector(divAppearanceSettings);
-hiddenSelector(divLogoutSettings);
+if (divAccountSettings === null || divAppearanceSettings === null || divLogoutSettings === null) {
+    chooseSelector(menuItems[0]);
+} else {
+    unhiddenSelector(divAccountSettings);
+    hiddenSelector(divAppearanceSettings);
+    hiddenSelector(divLogoutSettings);
+}
+
 
 for (let i = 0; i < menuItems.length; i++) {
     menuItems[i].addEventListener('click', (event) => {
         const activeIndex = activeItems.findIndex((element) => element === true);
-        if (activeIndex !== i){
+
+        if (activeIndex !== i) {
             activeItems[activeIndex] = false;
             activeItems[i] = true;
 
-            chooseSelector(menuItems[i].querySelector('#settingsLink'));
-            unChooseSelector(menuItems[activeIndex].querySelector('#settingsLink'));
+            chooseSelector(menuItems[i].querySelector('.settings-link'));
+            unChooseSelector(menuItems[activeIndex].querySelector('.settings-link'));
 
             switch (i) {
                 case 0: {

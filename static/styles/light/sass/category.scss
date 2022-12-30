@@ -1,0 +1,12 @@
+@import "variables", "mixins";
+
+// start category styles
+
+@media (min-width: 0px) and (max-width: 768px) {
+  #cardsBlock {
+    flex-direction: column !important;
+    @include horizontalBlockScrollBar;
+  }
+}
+
+// end category styles

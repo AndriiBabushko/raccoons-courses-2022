@@ -38,10 +38,6 @@
     border-color: $post_grey;
     box-shadow: 0 0 0 0.2rem $light_grey;
   }
-
-  option {
-    // ...
-  }
 }
 
 .invalid-feedback {
@@ -53,7 +49,7 @@
   width: 100%;
   position: absolute;
   display: block;
-  background-image: url('/static/img/light_programming_languages_pattern.png');
+  background-image: url('/static/img/site/light_programming_languages_pattern.png');
   background-size: cover;
   background-position: center;
   filter: blur(2px);

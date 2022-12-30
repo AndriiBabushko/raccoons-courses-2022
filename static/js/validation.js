@@ -38,7 +38,7 @@ const validateInput = (input, unnecessaryInput = null) => {
                         return false;
             }
         } else {
-            if (input.getAttribute('type') === 'password' && unnecessaryInput.getAttribute('type') === 'password') {
+            if (input.getAttribute('id') === 'password' && unnecessaryInput.getAttribute('id') === 'confirmPassword') {
                 if (input.value !== unnecessaryInput.value)
                     return false;
             }
@@ -48,7 +48,7 @@ const validateInput = (input, unnecessaryInput = null) => {
     return true;
 }
 
-const validation = (event, textAction = 'Action') => {
+const validation = (event, textAction = 'Some Action') => {
     console.log(textAction);
 
     const firstNameInput = document.querySelector('#textFirstName');
@@ -132,4 +132,17 @@ if (buttonUpdate !== null) {
     buttonUpdate.addEventListener('click', event => {
         validation(event, 'Update Action!');
     });
+}
+
+const buttonClear = document.querySelector('#buttonClear');
+if (buttonClear !== null) {
+    buttonClear.addEventListener('click', () => {
+        console.log('Clear Action!');
+
+        document.querySelector('#textFirstName').value = "";
+        document.querySelector('#textLastName').value = "";
+        document.querySelector('#email').value = "";
+        document.querySelector('#phoneNumber').value = "";
+        document.querySelector('#textareaBio').value = "";
+    })
 }
