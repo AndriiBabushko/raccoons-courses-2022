@@ -1,3 +1,12 @@
+<?php
+/**
+ *
+ */
+
+use models\User;
+
+?>
+
 <div class="container">
     <div class="row">
         <div class="w-100">
@@ -10,17 +19,13 @@
                         Various programming languages, tools and team work are studied here under the guidance of a mentor.
                     </p>
 
-                    <?php
-                    if (empty($language)) {
-                        echo "<a href='/user/eng/login' class='btn btn-secondary' id='buttonStartStudying'>Start studying!</a>";
-                    } else {
-                        echo "<a href='/user/$language/login' class='btn btn-secondary' id='buttonStartStudying'>Start studying!</a>";
-                    }
-                    ?>
+                    <a href='<?php if (User::isUserAuth()) echo "/courses/eng/index"; else  echo "/user/eng/register";?>' class='btn btn-secondary' id='buttonStartStudying'>
+                        Start studying!
+                    </a>
                 </div>
 
                 <div class="col-xl-6 col-lg-7 col-md-12 col-sm-12 col-12" id="startBlockLogo">
-                    <img src="/static/img/raccoon-logo.png" alt="Raccoon Logo" id="logo">
+                    <img src="/static/img/site/raccoon-logo.png" alt="Raccoon Logo" id="logo">
                 </div>
             </div>
         </div>
@@ -121,6 +126,46 @@
                     <div class="programming-language-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Wordpress">
                         <i class="devicon-wordpress-plain colored"></i>
                     </div>
+
+                    <div class="programming-language-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Apache">
+                        <i class="devicon-apache-plain colored"></i>
+                    </div>
+
+                    <div class="programming-language-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Arduino">
+                        <i class="devicon-arduino-plain colored"></i>
+                    </div>
+
+                    <div class="programming-language-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Azure">
+                        <i class="devicon-azure-plain colored"></i>
+                    </div>
+
+                    <div class="programming-language-container" data-bs-toggle="tooltip" data-bs-placement="top" title="MySQL">
+                        <i class="devicon-mysql-plain colored"></i>
+                    </div>
+
+                    <div class="programming-language-container" data-bs-toggle="tooltip" data-bs-placement="top" title="PostgreSQL">
+                        <i class="devicon-postgresql-plain colored"></i>
+                    </div>
+
+                    <div class="programming-language-container" data-bs-toggle="tooltip" data-bs-placement="top" title="MongoDB">
+                        <i class="devicon-mongodb-plain colored"></i>
+                    </div>
+
+                    <div class="programming-language-container" data-bs-toggle="tooltip" data-bs-placement="top" title="SQLite">
+                        <i class="devicon-sqlite-plain colored"></i>
+                    </div>
+
+                    <div class="programming-language-container" data-bs-toggle="tooltip" data-bs-placement="top" title="D3JS">
+                        <i class="devicon-d3js-plain colored"></i>
+                    </div>
+
+                    <div class="programming-language-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Jupyter">
+                        <i class="devicon-jupyter-plain colored"></i>
+                    </div>
+
+                    <div class="programming-language-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Linux">
+                        <i class="devicon-linux-plain colored"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -128,4 +173,4 @@
 
 </div>
 
-<script> <?php include_once('static/js/indexAnimations.js'); ?></script>
+<script type="module"> <?php include_once('static/js/index.js'); ?></script>

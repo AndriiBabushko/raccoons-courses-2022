@@ -8,15 +8,15 @@ $categories = \models\Category::getCategories();
         <h1 class="title fs-4 text-center mb-3 pb-1" id="adminTitle">Category admin page</h1>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-4 g-3">
+    <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-4">
         <?php foreach ($categories as $category): ?>
-            <div class="col" id="cardBlock">
-                <div class="card">
+            <div class="col card-block">
+                <div class="card border-2">
                     <img src="/static/img/category/<?php echo $category['photo']; ?>" class="card-img-top" alt="<?php echo $category['photo']; ?>">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $category['name']; ?></h5>
                         <p class="card-text"><?php echo $category['description']; ?></p>
-                        <a class="btn btn-secondary" href="/courses/eng/category/<?php echo $category['id_category'] ?>">
+                        <a class="btn btn-secondary card-link" href="/courses/eng/category/<?php echo $category['id_category'] ?>">
                             View category
                         </a>
                         <?php if ($user['is_admin'] === 1): ?>
