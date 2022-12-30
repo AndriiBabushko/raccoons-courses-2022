@@ -3,6 +3,7 @@
 namespace core;
 
 use controllers\SiteController;
+use models\Error;
 
 class Core
 {
@@ -27,18 +28,23 @@ class Core
 
     public function initialize(): void
     {
+        session_start();
         $this->db = new DB(DATABASE_HOST, DATABASE_LOGIN, DATABASE_PASSWORD, DATABASE_BASENAME);
         $this->requestMethod = $_SERVER['REQUEST_METHOD'];
     }
 
     public function run(): void
     {
+        $routeParts = [];
+
         if (isset($_GET['route'])) {
             $route = $_GET['route'];
             $routeParts = explode('/', $route);
-            $moduleName = strtolower(array_shift($routeParts));
-            $language = strtolower(array_shift($routeParts));
-            $actionName = strtolower(array_shift($routeParts));
+            if(count($routeParts) >= 3) {
+                $moduleName = strtolower(array_shift($routeParts));
+                $language = strtolower(array_shift($routeParts));
+                $actionName = strtolower(array_shift($routeParts));
+            }
         }
 
         if (empty($moduleName) || empty($actionName) || empty($language)) {
@@ -46,6 +52,9 @@ class Core
             $language = 'eng';
             $actionName = 'index';
         }
+
+        if(!is_dir("themes/light/$language"))
+            $language = 'eng';
 
         if (isset($_GET['language']))
             $language = $_GET['language'];
@@ -67,7 +76,12 @@ class Core
         if (class_exists($controllerName)) {
             $controller = new $controllerName();
             if (method_exists($controller, $controllerActionName)) {
-                $this->app['actionResult'] = $controller->$controllerActionName();
+                $actionResult = $controller->$controllerActionName($routeParts);
+
+                if ($actionResult instanceof Error)
+                    $statusCode = $actionResult->code;
+
+                $this->app['actionResult'] = $actionResult;
                 $this->app['pageTitle'] = 'Raccoons Courses - ' . ucfirst($actionName);
             } else {
                 $statusCode = 404;
