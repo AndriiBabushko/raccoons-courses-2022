@@ -29,8 +29,7 @@ class DB
         $newValuesString = implode(', ', $newValuesArray);
 
         $res = $this->pdo->prepare("INSERT INTO {$tableName} ({$fieldsParamsString}) VALUES ({$newValuesString})");
-        echo "<pre>";
-        var_dump($res);
+
         return $res->execute($newRow);
     }
 
