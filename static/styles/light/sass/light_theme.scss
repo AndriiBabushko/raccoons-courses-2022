@@ -1,4 +1,4 @@
-@import "index", "settings", "auth_forms", "category_forms", "courses", "category";
+@import "index", "navbar", "side_navbar", "settings", "auth_forms", "category_forms", "courses", "category";
 
 *, *:before, *:after {
   box-sizing: border-box;
@@ -8,24 +8,6 @@
 
 .header {
   background-color: $light_grey
-}
-
-.dropdown-item {
-  &:focus {
-    background-color: $post_grey;
-  }
-}
-
-.nav-link {
-  height: 100%;
-}
-
-.nav-block {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .footer {
