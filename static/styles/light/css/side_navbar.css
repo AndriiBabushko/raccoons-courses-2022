@@ -1,0 +1,12 @@
+#sidebar {
+  position: absolute;
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+#sidebar.active #sidebarToggler {
+  margin-right: -50px;
+}
+
+/*# sourceMappingURL=side_navbar.css.map */
