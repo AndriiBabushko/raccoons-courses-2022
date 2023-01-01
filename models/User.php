@@ -47,6 +47,12 @@ class User
 
     public static function deleteUser(int $id_user): bool
     {
+        $avatarName = self::getUserById($id_user)['avatar'];
+        $avatarPath = "static/img/category/$avatarName";
+
+        if(file_exists($avatarPath))
+            unlink($avatarPath);
+
         return Core::getInstance()->db->delete(self::$tableName, [
             'id_user' => $id_user
         ]);
