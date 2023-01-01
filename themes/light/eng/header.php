@@ -6,13 +6,15 @@
 ?>
 
 <header class="header">
-    <nav class="navbar navbar-expand-lg navbar-light navbar-bg">
-        <div class="container">
-            <img src="/static/img/site/raccoon-logo-1.png" alt="logo" width="50" height="50" class="img-fluid" id="headerLogo">
-            <a href='/site/eng/index' class='navbar-brand pl-2 text-wrap'>Raccourses</a>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container justify-content-center justify-content-sm-between">
+            <div class="d-flex flex-wrap justify-content-center  align-items-center">
+                <img src="/static/img/site/raccoon-logo-1.png" alt="logo" width="50" height="50" class="img-fluid" id="headerLogo">
+                <a href='/site/eng/index' class='navbar-brand text-wrap ps-2'>Raccourses</a>
+            </div>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                    aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
