@@ -16,7 +16,7 @@ const getCategoriesData = () => {
         obj['viewButtonText'] = viewButton.innerHTML;
         obj['viewButtonHref'] = viewButton.getAttribute('href');
 
-        const adminButtons = document.querySelector('.admin-buttons');
+        const adminButtons = cards[i].querySelector('.admin-buttons');
         if (adminButtons !== null) {
             const updateButton = adminButtons.querySelector('.btn-primary');
             const deleteButton = adminButtons.querySelector('.btn-danger');
@@ -28,12 +28,12 @@ const getCategoriesData = () => {
         data.push(obj);
     }
 
-    console.log(data);
     return data;
 }
 
 const createCards = (data) => {
     const cardsBlock = document.createElement('div');
+    console.log(data);
 
     for (let i = 0; i < data.length; i++) {
         const hr = document.createElement('hr');
