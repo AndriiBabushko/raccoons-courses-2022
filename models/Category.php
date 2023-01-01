@@ -39,6 +39,12 @@ class Category
 
     public static function deleteCategory(int $id_category): bool
     {
+        $imgName = self::getCategoryById($id_category)['photo'];
+        $imgPath = "static/img/category/$imgName";
+
+        if(file_exists($imgPath))
+            unlink($imgPath);
+
         return Core::getInstance()->db->delete(self::$tableName, [
             'id_category' => $id_category
         ]);
