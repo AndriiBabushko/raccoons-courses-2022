@@ -18,7 +18,11 @@ class CategoryController extends Controller
 
     public function indexAction(): Error|bool|string
     {
-        return $this->render();
+        $categories = Category::getCategories();
+
+        return $this->render(null, [
+            'categories' => $categories
+        ]);
     }
 
     public function addAction(): Error|bool|string
@@ -37,16 +41,16 @@ class CategoryController extends Controller
                 if ($addCategoryStatus)
                     $this->redirect("/category/$this->language/index");
 
-                if (Utils::ifLanguageEqual('ukr'))
-                    $errors['somethingWrong'] = 'Щось пішло не так! Спробуйте ще раз!';
-                if (Utils::ifLanguageEqual('eng'))
-                    $errors['somethingWrong'] = 'Something went wrong! Try again!';
+                $errors += Utils::generateError('somethingWrong', [
+                    'ukr' => 'Щось пішло не так! Спробуйте ще раз!',
+                    'eng' => 'Something went wrong! Try again!'
+                ]);
             }
 
-            if (Utils::ifLanguageEqual('ukr'))
-                $errors['name'] = 'Введена назва категорії вже існує!';
-            if (Utils::ifLanguageEqual('eng'))
-                $errors['name']  = 'The entered category name already exists!';
+            $errors += Utils::generateError('name', [
+                'ukr' => 'Введена назва категорії вже існує!',
+                'eng' => 'The entered category name already exists!'
+            ]);
 
             return $this->render(null, [
                 'model' => $model,
