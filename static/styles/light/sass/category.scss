@@ -3,10 +3,15 @@
 // start category styles
 
 .card {
+  border-color: $post_grey;
   transition-duration: 0.5s;
+  color: black;
+  z-index: 2!important;
 
   &:hover {
-    background-color: $light_grey;
+    background-color: $post_grey;
+    border-color: $light_grey;
+    color: white;
     transform: scale(0.95);
   }
 }
