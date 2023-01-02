@@ -30,4 +30,13 @@ class Utils
 
         return $errors;
     }
+
+    public static function checkImgExtension(string $imgName) {
+        $explodeArray = explode('.', $imgName);
+        $extension = end($explodeArray);
+        if ($extension === 'png' || $extension === 'jpg')
+            return true;
+
+        return false;
+    }
 }
