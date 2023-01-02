@@ -27,7 +27,7 @@ class User
     {
         $userUpdateData = Utils::filterArray($userUpdateData, ['first_name', 'last_name', 'email', 'phone_number', 'bio']);
 
-        $userPhotoName = self::getUserById($id_user)['photo'];
+        $userPhotoName = self::getUserById($id_user)['avatar'];
         $userPhotoPath = "static/img/user/$userPhotoName";
         if(file_exists($userPhotoPath) && $userPhotoName !== "no_image.png")
             unlink($userPhotoPath);
