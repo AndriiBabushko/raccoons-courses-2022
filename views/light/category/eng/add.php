@@ -35,13 +35,13 @@
 
                     <div class="form-group mb-3">
                         <label for="textareaDescription" id="labelDescription" class="form-label label">Category description</label>
-                        <textarea class="input form-control form-control-lg" name="description" id="textareaDescription"
+                        <textarea class="input form-control form-control-lg long" name="description" id="textareaDescription"
                                   placeholder="Tell what this category is about..."><?php if (!empty($model)) echo $model['description']; ?></textarea>
                     </div>
 
                     <div class="form-group mb-3">
                         <label for="categoryPhoto" id="labelCategoryName" class="form-label label">Category image</label>
-                        <input type='file' name='photo' id='categoryPhoto' class='input form__email form-control form-control-lg' accept="image/png, image/jpg">
+                        <input type='file' name='photo' id='categoryPhoto' class='input form__email form-control form-control-lg' accept="image/*">
                     </div>
 
                     <div class="form-group mb-3">
