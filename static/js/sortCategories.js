@@ -29,7 +29,7 @@ const getCategoriesData = () => {
     }
 
     return data;
-}
+};
 
 const createCards = (data) => {
     const cardsBlock = document.createElement('div');
@@ -97,7 +97,7 @@ const createCards = (data) => {
     }
 
     return cardsBlock;
-}
+};
 
 const showCards = cardsBlock => {
     const cardsContainer = document.querySelector('#cardsContainer');
@@ -106,7 +106,7 @@ const showCards = cardsBlock => {
     for (let i = 0; i < cols.length; i++) {
         cardsContainer.appendChild(cols[i]);
     }
-}
+};
 
 const deleteCards = () => {
     const cols = document.querySelectorAll('#cardsContainer .col');
@@ -114,7 +114,28 @@ const deleteCards = () => {
     for (let i = 0; i < cols.length; i++) {
         cols[i].remove();
     }
-}
+};
+
+const hideCards = (data, foundData) => {
+    const cardTitles = document.querySelectorAll('#cardsContainer .col .card-body .card-title');
+
+    for (let i = 0; i < cardTitles.length; i++) {
+        if (foundData.length === 0) {
+            cardTitles[i].parentElement.parentElement.parentElement.style.display = 'none';
+        } else {
+            if (foundData.length < data.length) {
+                for (let j = 0; j < foundData.length; j++) {
+                    if (cardTitles[i].innerHTML !== foundData[j]['name']) {
+                        cardTitles[i].parentElement.parentElement.parentElement.style.display = 'none';
+                    } else {
+                        cardTitles[i].parentElement.parentElement.parentElement.removeAttribute('style');
+                    }
+                }
+            } else
+                cardTitles[i].parentElement.parentElement.parentElement.removeAttribute('style');
+        }
+    }
+};
 
 const sortCategories = (orderBy, sortingType) => {
     const data = getCategoriesData();
@@ -139,13 +160,25 @@ const sortCategories = (orderBy, sortingType) => {
     showCards(createCards(data));
 };
 
+const findCategories = searchValue => {
+    const data = getCategoriesData();
+
+    const foundData = data.filter(obj => {
+        const cutValue = obj.name.slice(0, searchValue.length);
+        return cutValue === searchValue;
+    });
+
+    hideCards(data, foundData);
+};
+
+
 const searchInput = document.querySelector('#search');
 const orderByInput = document.querySelector('#orderBy');
 const sortingRadios = document.querySelectorAll('input[name="sortingType"]');
 
 searchInput.addEventListener('input', () => {
-    const searchRequest = searchInput.value;
-
+    const searchValue = searchInput.value;
+    findCategories(searchValue);
 });
 
 orderByInput.addEventListener('change', () => {
