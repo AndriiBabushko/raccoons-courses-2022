@@ -4,6 +4,7 @@ namespace controllers;
 
 use core\Controller;
 use core\Core;
+use core\Utils;
 use models\User;
 
 class SettingsController extends Controller
@@ -19,15 +20,17 @@ class SettingsController extends Controller
             $id_user = User::getCurrentAuthUser()['id_user'];
             $model = $_POST;
 
-            $updateStatus = User::updateUser($id_user, $model, $_FILES['avatar']['tmp_name'], $_FILES['avatar']['name']);
+            if(Utils::checkImgExtension($_FILES['avatar']['name'])) {
+                $updateStatus = User::updateUser($id_user, $model, $_FILES['avatar']['tmp_name'], $_FILES['avatar']['name']);
 
-            if ($updateStatus) {
-                $user = User::getUserById($id_user);
-                User::authUser($user);
+                if ($updateStatus) {
+                    $user = User::getUserById($id_user);
+                    User::authUser($user);
 
-                return $this->renderView('updateUserStatus', [
-                    'updateStatus' => true
-                ]);
+                    return $this->renderView('updateUserStatus', [
+                        'updateStatus' => true
+                    ]);
+                }
             }
 
             return $this->renderView('updateUserStatus', [
