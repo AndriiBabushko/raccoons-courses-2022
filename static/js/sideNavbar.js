@@ -5,9 +5,6 @@ const addRemoveId = (element, idName) => {
     return element.setAttribute('id', idName);
 }
 
-const addRemoveClass = (element, addClassName, removeClassName) => {
-
-}
 
 const sidebarCollapse = document.querySelector('#sidebarCollapse');
 const sidebar = document.querySelector('#sidebar');
