@@ -27,7 +27,8 @@ if (User::isUserAuth())
                                 <select class="form-select" name="orderBy" id="orderBy">
                                     <option selected>Order by</option>
                                     <option value="name">By Name</option>
-                                    <option value="description">By Description</option>
+                                    <option value="price">By Price</option>
+                                    <option value="short_description">By Short Description</option>
                                 </select>
                             </div>
                         </li>
@@ -79,10 +80,10 @@ if (User::isUserAuth())
                             <img src="/static/img/courses/<?php echo $good['photo']; ?>" class="card-img-top" alt="<?php echo $good['photo']; ?>">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $good['name']; ?></h5>
-                                <p class="card-subtitle">Price <?php echo $good['price']; ?> UAH</p>
+                                <p class="card-subtitle">Price <span class="price"><?php echo $good['price']; ?></span> UAH</p>
                                 <hr>
                                 <p class="card-text"><?php echo $good['short_description']; ?></p>
-                                <div class="d-flex justify-content-between">
+                                <div class="d-flex justify-content-between view-cart-buttons">
                                     <a class="btn btn-secondary card-link" href="/courses/eng/view/<?php echo $good['id_good']; ?>">
                                         View good
                                     </a>
@@ -92,7 +93,7 @@ if (User::isUserAuth())
                                 </div>
                                 <?php if (!empty($user) && $user['is_admin'] === 1): ?>
                                     <hr>
-                                    <div class="d-flex justify-content-between">
+                                    <div class="d-flex justify-content-between admin-buttons">
                                         <a class="btn btn-primary" href="/courses/eng/update?id_good=<?php echo $good['id_good']; ?>"><i class="bi bi-pencil"></i></a>
                                         <a class="btn btn-danger" href="/courses/eng/delete?id_good=<?php echo $good['id_good']; ?>"><i class="bi bi-trash"></i></a>
                                     </div>
@@ -108,5 +109,6 @@ if (User::isUserAuth())
     </div>
 </div>
 
-<script type="module"><?php require "static/js/sideNavbar.js"; ?></script>
-<script type="module" defer><?php require "static/js/sortGoods.js"; ?></script>
+<script><?php require_once "static/js/sort.js"; ?></script>
+<script><?php require_once "static/js/sideNavbar.js"; ?></script>
+<script><?php require_once "static/js/sortGoods.js"; ?></script>

@@ -101,5 +101,6 @@ if (User::isUserAuth())
     </div>
 </div>
 
-<script type="module"><?php require "static/js/sideNavbar.js"; ?></script>
-<script type="module" defer><?php require "static/js/sortCategories.js"; ?></script>
+<script><?php require_once "static/js/sort.js"; ?></script>
+<script><?php require_once "static/js/sideNavbar.js"; ?></script>
+<script><?php require_once "static/js/sortCategories.js"; ?></script>
