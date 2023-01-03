@@ -80,7 +80,7 @@ if (User::isUserAuth())
                                 <h5 class="card-title"><?php echo $category['name']; ?></h5>
                                 <hr>
                                 <p class="card-text"><?php echo $category['description']; ?></p>
-                                <a class="btn btn-secondary card-link" href="/category/eng/view/<?php echo $category['id_category'] ?>">
+                                <a class="btn btn-secondary card-link" href="/courses/eng/index/<?php echo $category['id_category'] ?>">
                                     View category
                                 </a>
                                 <?php if (!empty($user) && $user['is_admin'] === 1): ?>
@@ -101,6 +101,6 @@ if (User::isUserAuth())
     </div>
 </div>
 
-<script><?php require_once "static/js/sort.js"; ?></script>
-<script><?php require_once "static/js/sideNavbar.js"; ?></script>
-<script><?php require_once "static/js/sortCategories.js"; ?></script>
+<script defer><?php require_once "static/js/sort.js"; ?></script>
+<script defer><?php require_once "static/js/sideNavbar.js"; ?></script>
+<script defer><?php require_once "static/js/sortCategories.js"; ?></script>

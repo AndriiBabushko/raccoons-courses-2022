@@ -7,6 +7,7 @@ use core\Core;
 use core\Utils;
 use models\Category;
 use models\Error;
+use models\Good;
 use models\User;
 
 class CategoryController extends Controller

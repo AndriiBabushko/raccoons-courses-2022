@@ -62,6 +62,14 @@ class Good
         return null;
     }
 
+    public static function getGoodsByCategoryId(int $id_category): bool|array
+    {
+        return Core::getInstance()->db->select(self::$tableName, '*', [
+            'id_category' => $id_category
+        ]);
+    }
+
+
     public static function getGoods(): bool|array
     {
         return Core::getInstance()->db->select(self::$tableName);
