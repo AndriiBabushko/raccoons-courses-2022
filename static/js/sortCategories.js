@@ -31,7 +31,7 @@ const getCategoriesData = () => {
     return data;
 };
 
-const createCards = (data) => {
+const createCategoryCards = data => {
     const cardsBlock = document.createElement('div');
     console.log(data);
 
@@ -54,7 +54,7 @@ const createCards = (data) => {
         const cardBody = document.createElement('div');
         cardBody.classList.add('card-body');
 
-        if (data[i].hasOwnProperty('updateHref')) {
+        if (data[i].hasOwnProperty('updateHref') && data[i].hasOwnProperty('deleteHref')) {
             const updateIcon = document.createElement('i');
             updateIcon.classList.add('bi', 'bi-pencil');
 
@@ -72,7 +72,7 @@ const createCards = (data) => {
             deleteButton.appendChild(deleteIcon);
 
             const buttonsContainer = document.createElement('div');
-            buttonsContainer.classList.add('d-flex', 'justify-content-evenly', 'admin-buttons');
+            buttonsContainer.classList.add('d-flex', 'justify-content-between', 'admin-buttons');
             buttonsContainer.append(updateButton, deleteButton);
 
             cardBody.append(cardTitle, cardText, viewButton, hr, buttonsContainer);
@@ -99,44 +99,6 @@ const createCards = (data) => {
     return cardsBlock;
 };
 
-const showCards = cardsBlock => {
-    const cardsContainer = document.querySelector('#cardsContainer');
-    const cols = cardsBlock.querySelectorAll('.col');
-
-    for (let i = 0; i < cols.length; i++) {
-        cardsContainer.appendChild(cols[i]);
-    }
-};
-
-const deleteCards = () => {
-    const cols = document.querySelectorAll('#cardsContainer .col');
-
-    for (let i = 0; i < cols.length; i++) {
-        cols[i].remove();
-    }
-};
-
-const hideCards = (data, foundData) => {
-    const cardTitles = document.querySelectorAll('#cardsContainer .col .card-body .card-title');
-
-    for (let i = 0; i < cardTitles.length; i++) {
-        if (foundData.length === 0) {
-            cardTitles[i].parentElement.parentElement.parentElement.style.display = 'none';
-        } else {
-            if (foundData.length < data.length) {
-                for (let j = 0; j < foundData.length; j++) {
-                    if (cardTitles[i].innerHTML !== foundData[j]['name']) {
-                        cardTitles[i].parentElement.parentElement.parentElement.style.display = 'none';
-                    } else {
-                        cardTitles[i].parentElement.parentElement.parentElement.removeAttribute('style');
-                    }
-                }
-            } else
-                cardTitles[i].parentElement.parentElement.parentElement.removeAttribute('style');
-        }
-    }
-};
-
 const sortCategories = (orderBy, sortingType) => {
     const data = getCategoriesData();
 
@@ -149,28 +111,15 @@ const sortCategories = (orderBy, sortingType) => {
     }
 
     if (orderBy === 'description' && sortingType === 'ascendingSort') {
-        data.sort((obj1, obj2) => (obj1.name.localeCompare(obj2.name)) ? -1 : (obj2.name.localeCompare(obj1.name)) ? 1 : 0);
+        data.sort((obj1, obj2) => (obj1.description.localeCompare(obj2.description)) ? -1 : (obj2.description.localeCompare(obj1.description)) ? 1 : 0);
     }
 
     if (orderBy === 'description' && sortingType === 'descendingSort') {
-        data.sort((obj1, obj2) => (obj2.name.localeCompare(obj1.name)) ? -1 : (obj1.name.localeCompare(obj2.name)) ? 1 : 0);
+        data.sort((obj1, obj2) => (obj2.description.localeCompare(obj1.description)) ? -1 : (obj1.description.localeCompare(obj2.description)) ? 1 : 0);
     }
 
-    deleteCards();
-    showCards(createCards(data));
+    return data;
 };
-
-const findCategories = searchValue => {
-    const data = getCategoriesData();
-
-    const foundData = data.filter(obj => {
-        const cutValue = obj.name.slice(0, searchValue.length);
-        return cutValue === searchValue;
-    });
-
-    hideCards(data, foundData);
-};
-
 
 const searchInput = document.querySelector('#search');
 const orderByInput = document.querySelector('#orderBy');
@@ -178,7 +127,9 @@ const sortingRadios = document.querySelectorAll('input[name="sortingType"]');
 
 searchInput.addEventListener('input', () => {
     const searchValue = searchInput.value;
-    findCategories(searchValue);
+    const data = getCategoriesData();
+    const foundData = findData(data, searchValue);
+    hideCards(data, foundData);
 });
 
 orderByInput.addEventListener('change', () => {
@@ -188,7 +139,9 @@ orderByInput.addEventListener('change', () => {
     console.log(orderBy);
     console.log(sortingType);
 
-    sortCategories(orderBy, sortingType);
+    const data = sortCategories(orderBy, sortingType);
+    deleteCards();
+    showCards(createCategoryCards(data));
 });
 
 for (let i = 0; i < sortingRadios.length; i++) {
@@ -199,6 +152,8 @@ for (let i = 0; i < sortingRadios.length; i++) {
         console.log(orderBy);
         console.log(sortingType);
 
-        sortCategories(orderBy, sortingType);
+        const data = sortCategories(orderBy, sortingType);
+        deleteCards();
+        showCards(createCategoryCards(data));
     });
 }
