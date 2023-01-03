@@ -11,7 +11,7 @@ class CartController extends Controller
         parent::__construct();
     }
 
-    public function cartAction(): bool|string
+    public function indexAction(): bool|string
     {
         return $this->render();
     }
