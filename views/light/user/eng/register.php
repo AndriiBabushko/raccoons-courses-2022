@@ -17,7 +17,7 @@
 
                     <div class="form-group mb-3">
                         <label for="textFirstName" id="labelFirstName" class="form__label_first_name form-label label">First name</label>
-                        <input type='text' name='first_name' id='textFirstName' class='input form__text_first_name form-control form-control-lg'
+                        <input type='text' name='first_name' id='textFirstName' class='input form__text_first_name form-control form-control-lg username'
                                placeholder="Enter first name" value="<?php if (!empty($model['first_name'])) echo $model['first_name'] ?>">
                         <div class="invalid-feedback">
                             Contain numbers or length is less than 2.
