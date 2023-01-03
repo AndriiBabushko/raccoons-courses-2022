@@ -318,6 +318,7 @@
 
 #buttonRegister, #buttonLogin {
   width: 100%;
+  margin: 5px 0;
 }
 
 @media (min-width: 0px) and (max-width: 576px) {
@@ -426,6 +427,7 @@ textarea {
 
 #buttonAddCategory, #buttonUpdateCategory {
   width: 100%;
+  margin: 5px 0;
 }
 
 @media (min-width: 0px) and (max-width: 576px) {
@@ -440,6 +442,10 @@ textarea {
     filter: blur(1px);
     -webkit-filter: blur(1px);
   }
+  #buttonDeleteCategory, #buttonCancelDeleteCategory {
+    width: 100%;
+    margin: 5px 0;
+  }
 }
 @media (min-width: 576px) and (max-width: 768px) {
   #categoryAddForm, #categoryUpdateForm, #categoryDeleteForm {
@@ -448,6 +454,16 @@ textarea {
   }
   #content {
     width: 95%;
+  }
+  #buttonDeleteCategory, #buttonCancelDeleteCategory {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  #buttonDeleteCategory, #buttonCancelDeleteCategory {
+    width: 100%;
+    margin: 5px 0;
   }
 }
 #itemsContainer {
@@ -534,10 +550,11 @@ textarea {
 
 #buttonAddGood, #buttonUpdateGood {
   width: 100%;
+  margin: 5px 0;
 }
 
 @media (min-width: 0px) and (max-width: 576px) {
-  #categoryAddForm, #categoryUpdateForm, #categoryDeleteForm {
+  #goodAddForm, #goodUpdateForm, #goodDeleteForm {
     width: 90%;
     border-radius: 0;
   }
@@ -548,14 +565,28 @@ textarea {
     filter: blur(1px);
     -webkit-filter: blur(1px);
   }
+  #buttonDeleteGood, #buttonCancelDeleteGood {
+    width: 100%;
+    margin: 5px 0;
+  }
 }
 @media (min-width: 576px) and (max-width: 768px) {
-  #categoryAddForm, #categoryUpdateForm, #categoryDeleteForm {
+  #goodAddForm, #goodUpdateForm, #goodDeleteForm {
     width: 80%;
     border-radius: 0;
   }
   #content {
     width: 95%;
+  }
+  #buttonDeleteGood, #buttonCancelDeleteGood {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  #buttonDeleteGood, #buttonCancelDeleteGood {
+    width: 100%;
+    margin: 5px 0;
   }
 }
 *, *:before, *:after {
