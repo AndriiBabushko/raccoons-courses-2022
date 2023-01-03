@@ -51,7 +51,7 @@ if (User::isUserAuth())
 
         <div class="col">
             <div class="row my-2">
-                <div class="w-auto" id="sidebarToggler">
+                <div class="w-100" id="sidebarToggler">
                     <button class="navbar-toggler" type="button" id="sidebarCollapse">
                         <span class="bi bi-funnel"></span>
                     </button>
@@ -78,13 +78,14 @@ if (User::isUserAuth())
                             <img src="/static/img/category/<?php echo $category['photo']; ?>" class="card-img-top" alt="<?php echo $category['photo']; ?>">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $category['name']; ?></h5>
+                                <hr>
                                 <p class="card-text"><?php echo $category['description']; ?></p>
-                                <a class="btn btn-secondary card-link" href="/courses/eng/category/<?php echo $category['id_category'] ?>">
+                                <a class="btn btn-secondary card-link" href="/category/eng/view/<?php echo $category['id_category'] ?>">
                                     View category
                                 </a>
                                 <?php if (!empty($user) && $user['is_admin'] === 1): ?>
                                     <hr>
-                                    <div class="d-flex justify-content-evenly admin-buttons">
+                                    <div class="d-flex justify-content-between admin-buttons">
                                         <a class="btn btn-primary" href="/category/eng/update?id_category=<?php echo $category['id_category'] ?>"><i class="bi bi-pencil"></i></a>
                                         <a class="btn btn-danger" href="/category/eng/delete?id_category=<?php echo $category['id_category'] ?>"><i class="bi bi-trash"></i></a>
                                     </div>
