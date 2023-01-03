@@ -10,8 +10,8 @@ class Good
 
     public static function addGood(array $addData, string $imgPath, string $imgName): bool
     {
-        if (!file_exists("static/img/category/$imgName")) {
-            $newImgPath = "static/img/category/$imgName";
+        if (!file_exists("static/img/courses/$imgName")) {
+            $newImgPath = "static/img/courses/$imgName";
             $addData += ['photo' => $imgName];
             move_uploaded_file($imgPath, $newImgPath);
         }
