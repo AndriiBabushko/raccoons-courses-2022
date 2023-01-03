@@ -32,25 +32,32 @@ class CategoryController extends Controller
 
         if (Core::getInstance()->requestMethod === 'POST') {
             $model = $_POST;
-
             $errors = [];
 
-            if (Category::verifyCategoryByName($model['name'])) {
-                $addCategoryStatus = Category::addCategory($model, $_FILES['photo']['tmp_name'], $_FILES['photo']['name']);
+            if (Utils::checkImgExtension($_FILES['photo']['name'])) {
+                if (Category::verifyCategoryByName($model['name'])) {
+                    $addCategoryStatus = Category::addCategory($model, $_FILES['photo']['tmp_name'], $_FILES['photo']['name']);
 
-                if ($addCategoryStatus)
-                    $this->redirect("/category/$this->language/index");
+                    if ($addCategoryStatus)
+                        $this->redirect("/category/$this->language/index");
 
-                $errors += Utils::generateError('somethingWrong', [
-                    'ukr' => 'Щось пішло не так! Спробуйте ще раз!',
-                    'eng' => 'Something went wrong! Try again!'
+                    $errors += Utils::generateError('somethingWrong', [
+                        'ukr' => 'Щось пішло не так! Спробуйте ще раз!',
+                        'eng' => 'Something went wrong! Try again!'
+                    ]);
+                } else {
+                    $errors += Utils::generateError('name', [
+                        'ukr' => 'Введена назва категорії вже існує!',
+                        'eng' => 'The entered category name already exists!'
+                    ]);
+
+                }
+            } else {
+                $errors += Utils::generateError('photo', [
+                    'ukr' => 'Розширення файлу неправильне! Завантажте будь-ласка фотографію.',
+                    'eng' => 'File extension is wrong! Please download the photo.'
                 ]);
             }
-
-            $errors += Utils::generateError('name', [
-                'ukr' => 'Введена назва категорії вже існує!',
-                'eng' => 'The entered category name already exists!'
-            ]);
 
             return $this->render(null, [
                 'model' => $model,
@@ -70,12 +77,14 @@ class CategoryController extends Controller
             $id_category = $_GET['id_category'];
             $model = $_POST;
 
-            $updateCategoryStatus = Category::updateCategory($id_category, $model, $_FILES['photo']['tmp_name'], $_FILES['photo']['name']);
+            if (Utils::checkImgExtension($_FILES['photo']['name'])) {
+                $updateCategoryStatus = Category::updateCategory($id_category, $model, $_FILES['photo']['tmp_name'], $_FILES['photo']['name']);
 
-            if ($updateCategoryStatus)
-                return $this->renderView('updateCategoryStatus', [
-                    'updateStatus' => true
-                ]);
+                if ($updateCategoryStatus)
+                    return $this->renderView('updateCategoryStatus', [
+                        'updateStatus' => true
+                    ]);
+            }
 
             return $this->renderView('updateCategoryStatus', [
                 'updateStatus' => false
