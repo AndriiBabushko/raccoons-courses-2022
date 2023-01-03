@@ -49,7 +49,8 @@ const createGoodsCards = data => {
     console.log(data);
 
     for (let i = 0; i < data.length; i++) {
-        const hr = document.createElement('hr');
+        const userHr = document.createElement('hr');
+        const adminHr = document.createElement('hr');
 
         const viewButton = document.createElement('a');
         viewButton.classList.add('btn', 'btn-secondary', 'card-link');
@@ -101,9 +102,9 @@ const createGoodsCards = data => {
             adminButtonsContainer.classList.add('d-flex', 'justify-content-between', 'admin-buttons');
             adminButtonsContainer.append(updateButton, deleteButton);
 
-            cardBody.append(cardTitle, cardSubtitle, hr, cardText, viewCartButtonsContainer, hr, adminButtonsContainer);
+            cardBody.append(cardTitle, cardSubtitle, userHr, cardText, viewCartButtonsContainer, adminHr, adminButtonsContainer);
         } else {
-            cardBody.append(cardTitle, cardSubtitle, hr, cardText, viewCartButtonsContainer);
+            cardBody.append(cardTitle, cardSubtitle, userHr, cardText, viewCartButtonsContainer);
         }
 
         const img = document.createElement('img');
@@ -144,12 +145,12 @@ const sortGoods = (orderBy, sortingType) => {
         data.sort((obj1, obj2) => (obj1.price > obj2.price) ? -1 : (obj1.price < obj2.price) ? 1 : 0);
     }
 
-    if (orderBy === 'description' && sortingType === 'ascendingSort') {
-        data.sort((obj1, obj2) => (obj1.description.localeCompare(obj2.description)) ? -1 : (obj2.description.localeCompare(obj1.description)) ? 1 : 0);
+    if (orderBy === 'short_description' && sortingType === 'ascendingSort') {
+        data.sort((obj1, obj2) => (obj1.short_description.localeCompare(obj2.short_description)) ? -1 : (obj2.short_description.localeCompare(obj1.short_description)) ? 1 : 0);
     }
 
-    if (orderBy === 'description' && sortingType === 'descendingSort') {
-        data.sort((obj1, obj2) => (obj2.description.localeCompare(obj1.description)) ? -1 : (obj1.description.localeCompare(obj2.description)) ? 1 : 0);
+    if (orderBy === 'short_description' && sortingType === 'descendingSort') {
+        data.sort((obj1, obj2) => (obj2.short_description.localeCompare(obj1.short_description)) ? -1 : (obj1.short_description.localeCompare(obj2.short_description)) ? 1 : 0);
     }
 
     return data;
