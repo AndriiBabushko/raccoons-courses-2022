@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 w-100 position-relative">
-        <div class="form-container d-flex justify-content-center" id="categoryUpdateContainer">
+        <div class="form-container d-flex justify-content-center" id="categoryDeleteContainer">
             <form action="" method="post" enctype="multipart/form-data" class="d-flex flex-column align-items-center justify-content-center position-relative"
-                  id="categoryUpdateForm">
+                  id="categoryDeleteForm">
                 <div id="categoryFormImg"></div>
 
                 <div class="" id="content">
