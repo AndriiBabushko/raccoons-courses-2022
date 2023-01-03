@@ -25,8 +25,16 @@ const validateInput = (input, unnecessaryInput = null) => {
             if (input.value.length < 2)
                 return false;
             else {
-                if (input.getAttribute('type') === 'text')
+                if (input.classList.contains('username'))
                     if (isNumberInString(input.value.toString()))
+                        return false;
+
+                if (input.classList.contains('short'))
+                    if (input.value.length > 100)
+                        return false;
+
+                if (input.classList.contains('long'))
+                    if (input.value.length < 50)
                         return false;
 
                 if (input.getAttribute('type') === 'email' || input.getAttribute('name') === 'email')
@@ -48,6 +56,18 @@ const validateInput = (input, unnecessaryInput = null) => {
     return true;
 }
 
+const checkInputForValidate = (event, input) => {
+    if (input !== null)
+        if (validateInput(input)) {
+            addIsValid(input);
+            removeIsInvalid(input);
+        } else {
+            addIsInvalid(input);
+            removeIsValid(input);
+            event.preventDefault();
+        }
+}
+
 const validation = (event, textAction = 'Some Action') => {
     console.log(textAction);
 
@@ -58,45 +78,15 @@ const validation = (event, textAction = 'Some Action') => {
     const passwordInput = document.querySelector('#password');
     const confirmPasswordInput = document.querySelector('#confirmPassword');
 
-    if (firstNameInput !== null)
-        if (validateInput(firstNameInput)) {
-            addIsValid(firstNameInput);
-            removeIsInvalid(firstNameInput);
-        } else {
-            addIsInvalid(firstNameInput);
-            removeIsValid(firstNameInput);
-            event.preventDefault();
-        }
+    const goodNameInput = document.querySelector('#goodName');
+    const goodPriceInput = document.querySelector('#goodPrice');
+    const goodShortDescriptionInput = document.querySelector('#goodShortDescription');
+    const goodDescriptionInput = document.querySelector('#goodDescription');
 
-    if (lastNameInput !== null)
-        if (validateInput(lastNameInput)) {
-            addIsValid(lastNameInput);
-            removeIsInvalid(lastNameInput);
-        } else {
-            addIsInvalid(lastNameInput);
-            removeIsValid(lastNameInput);
-            event.preventDefault();
-        }
-
-    if (emailInput !== null)
-        if (validateInput(emailInput)) {
-            addIsValid(emailInput);
-            removeIsInvalid(emailInput);
-        } else {
-            addIsInvalid(emailInput);
-            removeIsValid(emailInput);
-            event.preventDefault();
-        }
-
-    if (phoneNumberInput !== null)
-        if (validateInput(phoneNumberInput)) {
-            addIsValid(phoneNumberInput);
-            removeIsInvalid(phoneNumberInput);
-        } else {
-            addIsInvalid(phoneNumberInput);
-            removeIsValid(phoneNumberInput);
-            event.preventDefault();
-        }
+    checkInputForValidate(event, firstNameInput);
+    checkInputForValidate(event, lastNameInput);
+    checkInputForValidate(event, emailInput);
+    checkInputForValidate(event, phoneNumberInput);
 
     if (passwordInput !== null && confirmPasswordInput !== null)
         if (validateInput(passwordInput, confirmPasswordInput)) {
@@ -111,26 +101,38 @@ const validation = (event, textAction = 'Some Action') => {
             removeIsValid(confirmPasswordInput);
             event.preventDefault();
         }
+
+    checkInputForValidate(event, goodNameInput);
+    checkInputForValidate(event, goodPriceInput);
+    checkInputForValidate(event, goodShortDescriptionInput);
+    checkInputForValidate(event, goodDescriptionInput);
 }
 
 const buttonLogin = document.querySelector('#buttonLogin');
 if (buttonLogin !== null) {
     buttonLogin.addEventListener('click', event => {
-        validation(event, 'Login Action!');
+        validation(event, 'Login user Action!');
     });
 }
 
 const buttonRegister = document.querySelector('#buttonRegister');
 if (buttonRegister !== null) {
     buttonRegister.addEventListener('click', event => {
-        validation(event, 'Register Action!');
+        validation(event, 'Register user Action!');
     });
 }
 
 const buttonUpdate = document.querySelector('#buttonUpdate');
 if (buttonUpdate !== null) {
     buttonUpdate.addEventListener('click', event => {
-        validation(event, 'Update Action!');
+        validation(event, 'Update user Action!');
+    });
+}
+
+const buttonAddGood = document.querySelector('#buttonAddGood');
+if (buttonAddGood !== null) {
+    buttonAddGood.addEventListener('click', event => {
+        validation(event, 'Add good Action!');
     });
 }
 
