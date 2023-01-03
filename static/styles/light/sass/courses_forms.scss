@@ -1,22 +1,22 @@
 @import "variables", "mixins", "forms";
 
-#categoryFormImg {
+#goodFormImg {
   @include formImg;
   background-image: url('/static/img/category/form_pattern_2.jpg');
   filter: blur(1px);
   -webkit-filter: blur(1px);
 }
 
-#categoryAddForm, #categoryUpdateForm, #categoryDeleteForm {
+#goodAddForm, #goodUpdateForm, #goodDeleteForm {
   @include formBlock;
 }
 
-#buttonAddCategory, #buttonUpdateCategory {
+#buttonAddGood, #buttonUpdateGood {
   @include formButtonWidth;
 }
 
 @media (min-width: 0px) and (max-width: 576px) {
-  #categoryAddForm, #categoryUpdateForm, #categoryDeleteForm {
+  #goodAddForm, #goodUpdateForm, #goodDeleteForm {
     @include mediaFormBlock0576;
   }
 
@@ -28,13 +28,13 @@
     @include mediaFormImg0576
   }
 
-  #buttonDeleteCategory, #buttonCancelDeleteCategory {
+  #buttonDeleteGood, #buttonCancelDeleteGood {
     @include formButtonWidth;
   }
 }
 
-@media (min-width: 576px) and (max-width: 768px){
-  #categoryAddForm, #categoryUpdateForm, #categoryDeleteForm {
+@media (min-width: 576px) and (max-width: 768px) {
+  #goodAddForm, #goodUpdateForm, #goodDeleteForm {
     @include mediaFormBlock576768;
   }
 
@@ -42,13 +42,13 @@
     @include mediaFormContent576768;
   }
 
-  #buttonDeleteCategory, #buttonCancelDeleteCategory {
+  #buttonDeleteGood, #buttonCancelDeleteGood {
     @include formButtonWidth;
   }
 }
 
 @media (min-width: 768px) and (max-width: 992px) {
-  #buttonDeleteCategory, #buttonCancelDeleteCategory {
+  #buttonDeleteGood, #buttonCancelDeleteGood {
     @include formButtonWidth;
   }
 }

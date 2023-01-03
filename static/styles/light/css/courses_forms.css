@@ -1,0 +1,97 @@
+.title {
+  border-bottom: 2px solid lightgrey;
+}
+
+.label {
+  font-size: 24px;
+  font-weight: bold;
+  display: inline-block !important;
+}
+
+textarea {
+  max-height: 500px;
+}
+
+.form-group {
+  width: 100% !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-control, .form-select {
+  border-width: 3px;
+}
+
+.form-control:focus {
+  border-color: #a1a1a1;
+  box-shadow: 0 0 0 0.2rem lightgrey;
+}
+
+.form-select:focus {
+  border-color: #a1a1a1;
+  box-shadow: 0 0 0 0.2rem lightgrey;
+}
+
+.invalid-feedback {
+  font-weight: 500;
+}
+
+#content {
+  position: relative;
+  z-index: 2;
+  background-color: transparent;
+  width: 75%;
+}
+
+#categoryFormImg {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: block;
+  background-size: cover;
+  background-position: center;
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+  z-index: 1;
+  border-radius: 10%;
+  background-image: url("/static/img/category/form_pattern_2.jpg");
+  filter: blur(1px);
+  -webkit-filter: blur(1px);
+}
+
+#goodAddForm, #goodUpdateForm, #goodDeleteForm {
+  border: 3px solid #a1a1a1;
+  border-radius: 5%;
+  margin: 10px;
+  width: 50%;
+}
+
+#buttonAddGood, #buttonUpdateGood {
+  width: 100%;
+}
+
+@media (min-width: 0px) and (max-width: 576px) {
+  #categoryAddForm, #categoryUpdateForm, #categoryDeleteForm {
+    width: 90%;
+    border-radius: 0;
+  }
+  #content {
+    width: 85%;
+  }
+  #categoryFormImg {
+    filter: blur(1px);
+    -webkit-filter: blur(1px);
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  #categoryAddForm, #categoryUpdateForm, #categoryDeleteForm {
+    width: 80%;
+    border-radius: 0;
+  }
+  #content {
+    width: 95%;
+  }
+}
+
+/*# sourceMappingURL=courses_forms.css.map */
