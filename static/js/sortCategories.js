@@ -21,8 +21,11 @@ const getCategoriesData = () => {
             const updateButton = adminButtons.querySelector('.btn-primary');
             const deleteButton = adminButtons.querySelector('.btn-danger');
 
-            obj['updateHref'] = updateButton.getAttribute('href');
-            obj['deleteHref'] = deleteButton.getAttribute('href');
+            if (updateButton !== null)
+                obj['updateHref'] = updateButton.getAttribute('href');
+
+            if (deleteButton !== null)
+                obj['deleteHref'] = deleteButton.getAttribute('href');
         }
 
         data.push(obj);
