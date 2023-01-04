@@ -72,7 +72,7 @@ foreach ($goods as $good)
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $good['name']; ?></h5>
                                     <hr>
-                                    <p class="card-subtitle">Price <?php echo $good['price']; ?> UAH</p>
+                                    <p class="card-subtitle"><span class="fw-bold">Price</span> <?php echo $good['price']; ?> UAH</p>
                                     <hr>
                                     <a href="/cart/eng/delete?id_good=<?php echo $good['id_good'] ?>" class="btn btn-danger">
                                         <i class="bi bi-trash"></i>
