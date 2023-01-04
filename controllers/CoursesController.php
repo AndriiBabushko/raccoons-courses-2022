@@ -17,8 +17,45 @@ class CoursesController extends Controller
         parent::__construct();
     }
 
-    public function indexAction(): bool|string
+    public function indexAction(array $params): bool|string
     {
+        if (!empty($params)) {
+            $id_category = $params[0];
+            $errors = [];
+
+            if (is_numeric($id_category)) {
+                $goods = Good::getGoodsByCategoryId(intval($id_category));
+                $category = Category::getCategoryById(intval($id_category));
+
+                if($category) {
+                    if ($goods) {
+                        return $this->render(null, [
+                            'goods' => $goods
+                        ]);
+                    } else {
+                        $errors += Utils::generateError('noGoods', [
+                            'ukr' => 'Товарів по даній категорії поки не існує! Поверніться пізніше <3',
+                            'eng' => 'There are no products in this category yet! Come back later <3'
+                        ]);
+                    }
+                } else {
+                    $errors += Utils::generateError('notExist', [
+                        'ukr' => 'Помилка! Категорія не існує!',
+                        'eng' => 'Error! Category does not exist!'
+                    ]);
+                }
+            } else {
+                $errors += Utils::generateError('somethingWrong', [
+                    'ukr' => 'Щось пішло не так! Спробуйте ще раз!',
+                    'eng' => 'Something went wrong! Try again!'
+                ]);
+            }
+
+            return $this->render(null, [
+                'errors' => $errors
+            ]);
+        }
+
         $goods = Good::getGoods();
 
         return $this->render(null, [
@@ -28,13 +65,23 @@ class CoursesController extends Controller
 
     public function viewAction(array $params): bool|string
     {
-        $id_category = $params[0];
-        var_dump($id_category);
+        if(!empty($params)) {
+            $id_good = $params[0];
+            $errors = [];
 
-        if (is_numeric($id_category)) {
+            if (is_numeric($id_good)) {
+                $good = Good::getGoodById($id_good);
+                if ($good) {
 
-        } else {
+                } else {
+                    $errors += Utils::generateError('notExist', [
+                        'ukr' => 'Помилка! Категорія не існує!',
+                        'eng' => 'Error! Category does not exist!'
+                    ]);
+                }
+            } else {
 
+            }
         }
 
         return $this->render();
@@ -48,7 +95,8 @@ class CoursesController extends Controller
         $categories = Category::getCategories();
 
         if (Core::getInstance()->requestMethod === 'POST') {
-            $model = $_POST;
+            $user = User::getCurrentAuthUser();
+            $model = $_POST + ['id_user' => $user['id_user']];
             $errors = [];
 
             if (Utils::checkImgExtension($_FILES['photo']['name'])) {
