@@ -52,17 +52,19 @@ if (User::isUserAuth())
 
         <div class="col">
             <div class="row my-2">
-                <div class="w-100" id="sidebarToggler">
-                    <button class="navbar-toggler" type="button" id="sidebarCollapse">
-                        <span class="bi bi-funnel"></span>
-                    </button>
-                </div>
+                <?php if (empty($errors['notExist']) && empty($errors['noGoods']) && empty($errors['somethingWrong'])): ?>
+                    <div class="w-100" id="sidebarToggler">
+                        <button class="navbar-toggler" type="button" id="sidebarCollapse">
+                            <span class="bi bi-funnel"></span>
+                        </button>
+                    </div>
+                <?php endif; ?>
 
                 <h1 class="title fs-4 text-center pb-2 border-bottom border-2" id="productsTitle">All goods:</h1>
             </div>
 
 
-            <?php if (!empty($user) && $user['is_admin'] === 1): ?>
+            <?php if (!empty($user) && $user['is_admin'] === 1 && empty($errors['notExist']) && empty($errors['noGoods']) && empty($errors['somethingWrong'])): ?>
                 <div class="row mb-3">
                     <div class="col">
                         <a class="btn btn-success w-100" href="/courses/eng/add">
@@ -73,42 +75,81 @@ if (User::isUserAuth())
                 </div>
             <?php endif; ?>
 
-            <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-4" id="cardsContainer">
-                <?php foreach ($goods as $good): ?>
-                    <div class="col">
-                        <div class="card border-2">
-                            <img src="/static/img/courses/<?php echo $good['photo']; ?>" class="card-img-top" alt="<?php echo $good['photo']; ?>">
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo $good['name']; ?></h5>
-                                <p class="card-subtitle">Price <span class="price"><?php echo $good['price']; ?></span> UAH</p>
-                                <hr>
-                                <p class="card-text"><?php echo $good['short_description']; ?></p>
-                                <div class="d-flex justify-content-between view-cart-buttons">
-                                    <a class="btn btn-secondary card-link" href="/courses/eng/view/<?php echo $good['id_good']; ?>">
-                                        View good
-                                    </a>
-                                    <a class="btn btn-success card-link" href="/cart/eng/index?id_good=<?php echo $good['id_good']; ?>">
-                                        Add to cart
-                                    </a>
-                                </div>
-                                <?php if (!empty($user) && $user['is_admin'] === 1): ?>
+            <?php if (empty($errors['notExist']) && empty($errors['noGoods']) && empty($errors['somethingWrong'])): ?>
+                <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-4" id="cardsContainer">
+                    <?php foreach ($goods as $good): ?>
+                        <div class="col">
+                            <div class="card border-2">
+                                <img src="/static/img/courses/<?php echo $good['photo']; ?>" class="card-img-top" alt="<?php echo $good['photo']; ?>">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo $good['name']; ?></h5>
+                                    <p class="card-subtitle">Price <span class="price"><?php echo $good['price']; ?></span> UAH</p>
                                     <hr>
-                                    <div class="d-flex justify-content-between admin-buttons">
-                                        <a class="btn btn-primary" href="/courses/eng/update?id_good=<?php echo $good['id_good']; ?>"><i class="bi bi-pencil"></i></a>
-                                        <a class="btn btn-danger" href="/courses/eng/delete?id_good=<?php echo $good['id_good']; ?>"><i class="bi bi-trash"></i></a>
+                                    <p class="card-text"><?php echo $good['short_description']; ?></p>
+                                    <div class="d-flex justify-content-between view-cart-buttons">
+                                        <a class="btn btn-secondary card-link" href="/courses/eng/view/<?php echo $good['id_good']; ?>">
+                                            View good
+                                        </a>
+                                        <?php if (!empty($user)): ?>
+                                            <a class="btn btn-success card-link" href="/cart/eng/index?id_good=<?php echo $good['id_good']; ?>">
+                                                Add to cart
+                                            </a>
+                                        <?php endif; ?>
                                     </div>
-                                <?php endif; ?>
+                                    <?php if (!empty($user) && $user['is_admin'] === 1): ?>
+                                        <hr>
+                                        <div class="d-flex justify-content-between admin-buttons">
+                                            <a class="btn btn-primary" href="/courses/eng/update?id_good=<?php echo $good['id_good']; ?>"><i class="bi bi-pencil"></i></a>
+                                            <a class="btn btn-danger" href="/courses/eng/delete?id_good=<?php echo $good['id_good']; ?>"><i class="bi bi-trash"></i></a>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($errors['notExist'])): ?>
+                <div class="row mt-3">
+                    <div class="col">
+                        <div class="alert alert-danger my-2 w-100 text-center">
+                            <i class="bi bi-exclamation-octagon-fill"></i>
+                            <?php echo $errors['notExist']; ?>
+                        </div>
                     </div>
-                <?php endforeach; ?>
-            </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($errors['noGoods'])): ?>
+                <div class="row mt-3">
+                    <div class="col">
+                        <div class="alert alert-warning my-2 w-100 text-center">
+                            <i class="bi bi-exclamation-triangle-fill"></i>
+                            <?php echo $errors['noGoods']; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($errors['somethingWrong'])): ?>
+                <div class="row mt-3">
+                    <div class="col">
+                        <div class="alert alert-danger my-2 w-100 text-center">
+                            <i class="bi bi-exclamation-diamond-fill"></i>
+                            <?php echo $errors['somethingWrong']; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
 
             <div class="row mt-3"></div>
         </div>
     </div>
 </div>
 
-<script><?php require_once "static/js/sort.js"; ?></script>
-<script><?php require_once "static/js/sideNavbar.js"; ?></script>
-<script><?php require_once "static/js/sortGoods.js"; ?></script>
+<?php if (empty($errors['notExist']) && empty($errors['noGoods']) && empty($errors['somethingWrong'])): ?>
+    <script defer><?php include_once "static/js/sideNavbar.js"; ?></script>
+<?php endif; ?>
+<script defer><?php require_once "static/js/sort.js"; ?></script>
+<script defer><?php require_once "static/js/sortGoods.js"; ?></script>

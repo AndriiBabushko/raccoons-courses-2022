@@ -10,6 +10,7 @@ if (User::isUserAuth())
     $user = User::getCurrentAuthUser();
 ?>
 
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 col-xl-2 col-lg-2 col-md-3 col-sm-12 p-0 sidebar-col" id="sidebarCol">
@@ -101,6 +102,6 @@ if (User::isUserAuth())
     </div>
 </div>
 
+<script defer><?php include_once "static/js/sideNavbar.js"; ?></script>
 <script defer><?php require_once "static/js/sort.js"; ?></script>
-<script defer><?php require_once "static/js/sideNavbar.js"; ?></script>
 <script defer><?php require_once "static/js/sortCategories.js"; ?></script>
