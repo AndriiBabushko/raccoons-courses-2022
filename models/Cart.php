@@ -20,6 +20,13 @@ class Cart
         ]);
     }
 
+    public static function deleteGoodFromCart(int $id_user, array $tableFields): bool
+    {
+        return Core::getInstance()->db->update(self::$tableName, $tableFields, [
+            'id_user' => $id_user
+        ]);
+    }
+
     public static function getCartGoodsByUserID($id_user): mixed
     {
         $cart = Core::getInstance()->db->select(self::$tableName, 'goods', [
