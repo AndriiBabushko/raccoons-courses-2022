@@ -41,7 +41,6 @@ class UserController extends Controller
                 ]);
             } else {
                 User::authUser($user);
-                Cart::updateCartByUserID($user['id_user'], ['goods' => serialize([])]);
 
                 $this->redirect('/');
             }
