@@ -102,6 +102,18 @@ class User
         return null;
     }
 
+    public static function getUserByEmail(string $email): mixed
+    {
+        $user = Core::getInstance()->db->select(self::$tableName, '*', [
+            'email' => $email
+        ]);
+
+        if (!empty($user))
+            return $user[0];
+
+        return null;
+    }
+
     public static function authUser(array|bool $user): void
     {
         $_SESSION['user'] = $user;
