@@ -18,9 +18,8 @@ class CartController extends Controller
     public function indexAction(): bool|string
     {
         if (!User::isUserAuth())
-            $this->redirect('/');
+            $this->redirect("/user/$this->language/login");
 
-        //echo "<pre>";
         $errors = [];
         $id_user = intval(User::getCurrentAuthUser()['id_user']);
 
@@ -66,10 +65,54 @@ class CartController extends Controller
         ]);
     }
 
-    public function deleteAction()
+    public function deleteAction(): bool|string
     {
+        if (!User::isUserAuth())
+            $this->redirect("/user/$this->language/login");
 
+        $errors = [];
+        $id_user = intval(User::getCurrentAuthUser()['id_user']);
 
-        return $this->renderView("index");
+        if (isset($_GET['id_good'])) {
+            $id_good = intval($_GET['id_good']);
+            $good = Good::getGoodById($id_good);
+
+            if (Cart::isGoodInCart($id_user, $id_good)) {
+                $cartGoods = Cart::getCartGoodsByUserID($id_user);
+
+                if ($cartGoods !== null)
+                    $goods = unserialize($cartGoods);
+                else
+                    $errors += Utils::generateError('somethingWrong', [
+                        'ukr' => 'Щось пішло не так! Спробуйте ще раз!',
+                        'eng' => 'Something went wrong! Try again!'
+                    ]);
+
+                if (!empty($goods)) {
+                    $findGoods = array_filter($goods, function ($item) {
+                        return $item['id_good'] != $_GET['id_good'];
+                    });
+
+                    $model = ['goods' => serialize($findGoods)];
+                    $cartUpdateStatus = Cart::updateCartByUserID($id_user, $model);
+
+                    if ($cartUpdateStatus) {
+                        return $this->render("views/$this->theme/cart/$this->language/index.php", [
+                            'goods' => $findGoods,
+                            'errors' => $errors
+                        ]);
+                    } else {
+                        $errors += Utils::generateError('somethingWrong', [
+                            'ukr' => 'Щось пішло не так! Спробуйте ще раз!',
+                            'eng' => 'Something went wrong! Try again!'
+                        ]);
+                    }
+                }
+            }
+        }
+
+        return $this->render("views/$this->theme/cart/$this->language/index.php", [
+            'errors' => $errors
+        ]);
     }
 }
