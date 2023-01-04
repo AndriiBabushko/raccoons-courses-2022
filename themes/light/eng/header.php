@@ -3,6 +3,11 @@
  * @var models\User $user
  * @var array $categories
  */
+
+if(!empty($user))
+    $goodsCount = count(unserialize(\models\Cart::getCartGoodsByUserID($user['id_user'])));
+else
+    $goodsCount = 0;
 ?>
 
 <header class="header">
@@ -45,7 +50,9 @@
                             <a class='nav-link' href='/cart/eng/index' data-toggle='tooltip' data-placement='top' title='Cart'>
                                 <span class="nav-block">
                                     <div>
-                                        <span class='badge badge-pill bg-secondary'>0</span>
+                                        <span class='badge badge-pill bg-secondary'>
+                                            <?php echo $goodsCount; ?>
+                                        </span>
                                         <span><i class='bi bi-cart fs-4'></i></span>
                                     </div>
                                     Cart
