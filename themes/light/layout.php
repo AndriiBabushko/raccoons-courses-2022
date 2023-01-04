@@ -9,7 +9,7 @@ use models\Category;
 use models\User;
 
 $user = null;
-$categories = Category::getCategories();
+$goods = Category::getCategories();
 
 if (User::isUserAuth())
     $user = User::getCurrentAuthUser();
