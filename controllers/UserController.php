@@ -6,6 +6,7 @@ use core\Controller;
 use core\Core;
 use core\Utils;
 use JetBrains\PhpStorm\NoReturn;
+use models\Cart;
 use models\User;
 
 class UserController extends Controller
@@ -40,6 +41,7 @@ class UserController extends Controller
                 ]);
             } else {
                 User::authUser($user);
+                Cart::updateCartByUserID($user['id_user'], ['goods' => serialize([])]);
 
                 $this->redirect('/');
             }
@@ -74,6 +76,7 @@ class UserController extends Controller
                 ]);
             } else {
                 User::addUser($_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['phone_number'], $_POST['password']);
+                Cart::addCart(['id_user' => User::getUserByEmail($_POST['email'])['id_user']]);
 
                 return $this->renderView("registerStatus");
             }
