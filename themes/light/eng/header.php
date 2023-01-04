@@ -42,7 +42,7 @@
                 <ul class="navbar-nav">
                     <?php if (!empty($user)): ?>
                         <li class='nav-item'>
-                            <a class='nav-link' href='/courses/eng/cart' data-toggle='tooltip' data-placement='top' title='Cart'>
+                            <a class='nav-link' href='/cart/eng/index' data-toggle='tooltip' data-placement='top' title='Cart'>
                                 <span class="nav-block">
                                     <div>
                                         <span class='badge badge-pill bg-secondary'>0</span>
