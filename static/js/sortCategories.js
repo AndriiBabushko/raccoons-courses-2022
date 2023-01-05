@@ -39,7 +39,8 @@ const createCategoryCards = data => {
     console.log(data);
 
     for (let i = 0; i < data.length; i++) {
-        const hr = document.createElement('hr');
+        const userHr = document.createElement('hr');
+        const adminHr = document.createElement('hr');
 
         const viewButton = document.createElement('a');
         viewButton.classList.add('btn', 'btn-secondary', 'card-link');
@@ -78,9 +79,9 @@ const createCategoryCards = data => {
             buttonsContainer.classList.add('d-flex', 'justify-content-between', 'admin-buttons');
             buttonsContainer.append(updateButton, deleteButton);
 
-            cardBody.append(cardTitle, cardText, viewButton, hr, buttonsContainer);
+            cardBody.append(cardTitle, userHr, cardText, viewButton, adminHr, buttonsContainer);
         } else {
-            cardBody.append(cardTitle, cardText, viewButton);
+            cardBody.append(cardTitle, userHr, cardText, viewButton);
         }
 
         const img = document.createElement('img');

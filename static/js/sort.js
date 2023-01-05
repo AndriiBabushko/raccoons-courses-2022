@@ -41,6 +41,6 @@ const hideCards = (data, foundData) => {
 const findData = (data, searchValue) => {
     return data.filter(obj => {
         const cutValue = obj.name.slice(0, searchValue.length);
-        return cutValue === searchValue;
+        return cutValue.toLowerCase() === searchValue.toLowerCase();
     });
 };
