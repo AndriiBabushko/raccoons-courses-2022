@@ -20,13 +20,13 @@ class Utils
         return \core\Core::getInstance()->app['language'] === $language;
     }
 
-    public static function generateError(string $errorName, array $errorsTextList): array
+    public static function generateMessage(string $messageName, array $messagesTextList): array
     {
         $errors = [];
 
-        foreach ($errorsTextList as $key => $value)
+        foreach ($messagesTextList as $key => $value)
             if (Utils::ifLanguageEqual($key))
-                $errors[$errorName] = $value;
+                $errors[$messageName] = $value;
 
         return $errors;
     }
