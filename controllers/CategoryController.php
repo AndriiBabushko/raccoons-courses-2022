@@ -42,19 +42,19 @@ class CategoryController extends Controller
                     if ($addCategoryStatus)
                         $this->redirect("/category/$this->language/index");
 
-                    $errors += Utils::generateError('somethingWrong', [
+                    $errors += Utils::generateMessage('somethingWrong', [
                         'ukr' => 'Щось пішло не так! Спробуйте ще раз!',
                         'eng' => 'Something went wrong! Try again!'
                     ]);
                 } else {
-                    $errors += Utils::generateError('name', [
+                    $errors += Utils::generateMessage('name', [
                         'ukr' => 'Введена назва категорії вже існує!',
                         'eng' => 'The entered category name already exists!'
                     ]);
 
                 }
             } else {
-                $errors += Utils::generateError('photo', [
+                $errors += Utils::generateMessage('photo', [
                     'ukr' => 'Розширення файлу неправильне! Завантажте будь-ласка фотографію.',
                     'eng' => 'File extension is wrong! Please download the photo.'
                 ]);
