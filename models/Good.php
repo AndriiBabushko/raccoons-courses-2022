@@ -8,7 +8,7 @@ class Good
 {
     protected static string $tableName = "Good";
 
-    public static function addGood(array $addData, string $imgPath, string $imgName): bool
+    public static function addGood(array $addData, string $imgPath = "", string $imgName = ""): bool
     {
         if (!file_exists("static/img/courses/$imgName")) {
             $newImgPath = "static/img/courses/$imgName";
@@ -19,7 +19,7 @@ class Good
         return Core::getInstance()->db->insert(self::$tableName, $addData);
     }
 
-    public static function updateGood(int $id_good, array $updateData, string $imgPath, string $imgName): bool
+    public static function updateGood(int $id_good, array $updateData, string $imgPath = "", string $imgName = ""): bool
     {
         $goodPhotoName = self::getGoodById($id_good)['photo'];
         $photoPath = "static/img/courses/$goodPhotoName";
@@ -42,7 +42,7 @@ class Good
         $imgName = self::getGoodById($id_good)['photo'];
         $imgPath = "static/img/category/$imgName";
 
-        if(file_exists($imgPath))
+        if (file_exists($imgPath))
             unlink($imgPath);
 
         return Core::getInstance()->db->delete(self::$tableName, [
