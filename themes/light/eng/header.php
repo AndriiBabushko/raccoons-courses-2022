@@ -4,10 +4,13 @@
  * @var array $categories
  */
 
-if(!empty($user))
-    $goodsCount = count(unserialize(\models\Cart::getCartGoodsByUserID($user['id_user'])));
-else
-    $goodsCount = 0;
+$goodsCount = 0;
+
+if(!empty($user)) {
+    $cartGoods = \models\Cart::getCartGoodsByUserID($user['id_user']);
+    if ($cartGoods)
+        $goodsCount = count(unserialize($cartGoods));
+}
 ?>
 
 <header class="header">
