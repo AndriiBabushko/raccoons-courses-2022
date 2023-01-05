@@ -76,7 +76,7 @@ if (User::isUserAuth())
             <?php endif; ?>
 
             <?php if (empty($errors['notExist']) && empty($errors['noGoods']) && empty($errors['somethingWrong'])): ?>
-                <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-4" id="cardsContainer">
+                <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 g-4" id="cardsContainer">
                     <?php foreach ($goods as $good): ?>
                         <div class="col">
                             <div class="card border-2">
@@ -114,7 +114,7 @@ if (User::isUserAuth())
                 <div class="row mt-3">
                     <div class="col">
                         <div class="alert alert-danger my-2 w-100 text-center">
-                            <i class="bi bi-exclamation-octagon-fill"></i>
+                            <i class="bi bi-exclamation-diamond-fill"></i>
                             <?php echo $errors['notExist']; ?>
                         </div>
                     </div>
