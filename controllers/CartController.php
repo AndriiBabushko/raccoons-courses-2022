@@ -27,41 +27,100 @@ class CartController extends Controller
             $id_good = intval($_GET['id_good']);
             $good = Good::getGoodById($id_good);
 
-            if (!Cart::isGoodInCart($id_user, $id_good)) {
-                $cartGoods = Cart::getCartGoodsByUserID($id_user);
-                if ($cartGoods !== null)
-                    $goods = unserialize($cartGoods);
+            if ($good) {
+                if (!Cart::isGoodInCart($id_user, $id_good)) {
+                    $cartGoods = Cart::getCartGoodsByUserID($id_user);
+                    if ($cartGoods !== null)
+                        $goods = unserialize($cartGoods);
 
-                if (!empty($goods))
-                    $goods[] = $good;
-                else
-                    $goods = [$good];
+                    if (!empty($goods))
+                        $goods[] = $good;
+                    else
+                        $goods = [$good];
 
-                $model = ['goods' => serialize($goods)];
-                $cartUpdateStatus = Cart::updateCartByUserID($id_user, $model);
+                    $model = ['goods' => serialize($goods)];
+                    $cartUpdateStatus = Cart::updateCartByUserID($id_user, $model);
 
-                if ($cartUpdateStatus) {
-                    return $this->render(null, [
-                        'goods' => $goods,
-                        'errors' => $errors
-                    ]);
+                    if ($cartUpdateStatus) {
+                        return $this->render(null, [
+                            'goods' => $goods,
+                            'errors' => $errors
+                        ]);
+                    } else {
+                        $errors += Utils::generateMessage('somethingWrong', [
+                            'ukr' => 'Щось пішло не так! Спробуйте ще раз!',
+                            'eng' => 'Something went wrong! Try again!'
+                        ]);
+                    }
                 } else {
-                    $errors += Utils::generateError('somethingWrong', [
-                        'ukr' => 'Щось пішло не так! Спробуйте ще раз!',
-                        'eng' => 'Something went wrong! Try again!'
+                    $errors += Utils::generateMessage('goodExists', [
+                        'ukr' => 'Даний товар вже існує в корзині! Поверніться та виберіть інший.',
+                        'eng' => 'This product already exists in the basket! Go back and choose another one.'
                     ]);
                 }
             } else {
-                $errors += Utils::generateError('goodExists', [
-                    'ukr' => 'Даний товар вже існує в корзині! Поверніться та виберіть інший.',
-                    'eng' => 'This product already exists in the basket! Go back and choose another one.'
+                $errors += Utils::generateMessage('goodNotExists', [
+                    'ukr' => 'Помилка! Даний товар не існує.',
+                    'eng' => 'Error! This product does not exist.'
                 ]);
             }
         }
 
+        $cartGoods = Cart::getCartGoodsByUserID($id_user);
+        if($cartGoods != null)
+            return $this->render(null, [
+                'errors' => $errors,
+                'goods' => unserialize($cartGoods)
+            ]);
+
         return $this->render(null, [
             'errors' => $errors,
-            'goods' => unserialize(Cart::getCartGoodsByUserID($id_user))
+            'goods' => []
+        ]);
+    }
+
+    public function buyAction(): bool|string
+    {
+        if (!User::isUserAuth())
+            $this->redirect("/user/$this->language/login");
+
+        $errors = [];
+        $id_user = intval(User::getCurrentAuthUser()['id_user']);
+        $cartGoods = Cart::getCartGoodsByUserID($id_user);
+
+        if ($cartGoods !== null)
+            $goods = unserialize($cartGoods);
+
+        if (!empty($goods)) {
+            $updateUserGoodsStatus = User::updateUser($id_user, ['bought_goods' => serialize($goods)]);
+
+            if (!$updateUserGoodsStatus) {
+                $errors += Utils::generateMessage('somethingWrong', [
+                    'ukr' => 'Щось пішло не так при оновлені придбаних товарів! Спробуйте ще раз!',
+                    'eng' => 'Something went wrong when updating purchased items! Try again!'
+                ]);
+
+                return $this->render(null, [
+                    'errors' => $errors
+                ]);
+            }
+
+            Cart::updateCartByUserID($id_user, ['goods' => serialize([])]);
+
+            return $this->render(null, [
+                'messages' => Utils::generateMessage('boughtSuccessMessage', [
+                    'ukr' => 'Успішно! Ви придбали товар/товари!',
+                    'eng' => 'Successfully! You have purchased an item(s)!'
+                ])
+            ]);
+        } else
+            $errors += Utils::generateMessage('goodsInCart', [
+                'ukr' => 'Попередження! Товарів в корзині немає!',
+                'eng' => 'Warning! There are no products in the basket!'
+            ]);
+
+        return $this->render(null, [
+            'errors' => $errors
         ]);
     }
 
@@ -83,7 +142,7 @@ class CartController extends Controller
                 if ($cartGoods !== null)
                     $goods = unserialize($cartGoods);
                 else
-                    $errors += Utils::generateError('somethingWrong', [
+                    $errors += Utils::generateMessage('somethingWrong', [
                         'ukr' => 'Щось пішло не так! Спробуйте ще раз!',
                         'eng' => 'Something went wrong! Try again!'
                     ]);
@@ -102,7 +161,7 @@ class CartController extends Controller
                             'errors' => $errors
                         ]);
                     } else {
-                        $errors += Utils::generateError('somethingWrong', [
+                        $errors += Utils::generateMessage('somethingWrong', [
                             'ukr' => 'Щось пішло не так! Спробуйте ще раз!',
                             'eng' => 'Something went wrong! Try again!'
                         ]);
