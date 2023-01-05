@@ -38,7 +38,10 @@ class SettingsController extends Controller
             ]);
         }
 
-        return $this->render();
+        return $this->render(null, [
+            'language' => $this->language,
+            'theme' => $this->theme
+        ]);
     }
 
     public function deleteUserAction(): bool|string
