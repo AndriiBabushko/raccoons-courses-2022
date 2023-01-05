@@ -72,7 +72,7 @@ if (User::isUserAuth())
                 </div>
             <?php endif; ?>
 
-            <div class="row row-cols-1 row-cols-lg-4 row-cols-md-2 row-cols-sm-2 g-4" id="cardsContainer">
+            <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 g-4" id="cardsContainer">
                 <?php foreach ($categories as $category): ?>
                     <div class="col">
                         <div class="card border-2">
