@@ -23,9 +23,9 @@ class User
         );
     }
 
-    public static function updateUser(int $id_user, array $userUpdateData, string $imgPath, string $imgName): bool
+    public static function updateUser(int $id_user, array $userUpdateData, string $imgPath = "", string $imgName = ""): bool
     {
-        $userUpdateData = Utils::filterArray($userUpdateData, ['first_name', 'last_name', 'email', 'phone_number', 'bio']);
+        $userUpdateData = Utils::filterArray($userUpdateData, ['first_name', 'last_name', 'email', 'phone_number', 'bio', 'bought_goods']);
 
         $userPhotoName = self::getUserById($id_user)['avatar'];
         $userPhotoPath = "static/img/user/$userPhotoName";
@@ -38,7 +38,7 @@ class User
             move_uploaded_file($imgPath, $newImgPath);
         }
 
-        return \core\Core::getInstance()->db->update(
+        return Core::getInstance()->db->update(
             self::$tableName, $userUpdateData, [
                 'id_user' => $id_user
             ]
@@ -56,6 +56,18 @@ class User
         return Core::getInstance()->db->delete(self::$tableName, [
             'id_user' => $id_user
         ]);
+    }
+
+    public static function getBoughtGoodsByUserID($id_user): mixed
+    {
+        $cart = Core::getInstance()->db->select(self::$tableName, 'bought_goods', [
+            'id_user' => $id_user
+        ]);
+
+        if (!empty($cart))
+            return $cart[0]['bought_goods'];
+
+        return null;
     }
 
     public static function isEmailExists(string $email): bool
