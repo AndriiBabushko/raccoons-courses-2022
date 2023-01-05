@@ -5,6 +5,8 @@ use models\User;
 /**
  * @var bool $updateStatus
  * @var bool $deleteStatus
+ * @var string $language
+ * @var string $theme
  */
 
 $user = null;
@@ -189,6 +191,7 @@ if (User::isUserAuth())
                                                 alt="Ukraine">
                                             ';
                                             }
+
 
                                             if (!empty($language)) {
                                                 if (isset($_GET['language']) && $_GET['language'] == 'eng' || $language == 'eng')
