@@ -17,7 +17,7 @@ foreach ($goods as $good)
                 <h1 class="title fs-4 text-center pb-2 border-bottom border-2" id="cartTitle">Goods for purchase:</h1>
             </div>
 
-            <?php if (!empty($goods)): ?>
+            <?php if (!empty($goods) && empty($errors['goodNotExists']) && empty($errors['goodExists']) && empty($errors['somethingWrong'])): ?>
                 <div class="row mt-3" id="cartTableRow">
                     <table class="table fs-5 fw-normal" id="cartTable">
                         <thead class="table-secondary">
@@ -54,7 +54,7 @@ foreach ($goods as $good)
                         </tr>
                         <tr>
                             <td colspan="5">
-                                <a href="/cart/eng/buy>" class="btn btn-success w-100">
+                                <a href="/cart/eng/buy" class="btn btn-success w-100">
                                     <i class="bi bi-wallet2 me-2"></i>
                                     Buy
                                 </a>
@@ -94,7 +94,7 @@ foreach ($goods as $good)
                 <div class="row mb-2" id="cartBuyButtonBlock">
                     <div class="col">
                         <div class="w-100">
-                            <a href="/cart/eng/buy>" class="btn btn-success w-100">
+                            <a href="/cart/eng/buy" class="btn btn-success w-100">
                                 <i class="bi bi-wallet2 me-2"></i>
                                 Buy
                             </a>
@@ -109,6 +109,39 @@ foreach ($goods as $good)
                         <div class="alert alert-warning my-2 w-100 text-center">
                             <i class="bi bi-exclamation-octagon-fill"></i>
                             There are no products to buy! Add some on the products page :)
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($errors['goodNotExists'])): ?>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="alert alert-danger my-2 w-100 text-center">
+                            <i class="bi bi-exclamation-diamond-fill"></i>
+                            <?php echo $errors['goodNotExists']; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($errors['goodExists'])): ?>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="alert alert-danger my-2 w-100 text-center">
+                            <i class="bi bi-exclamation-diamond-fill"></i>
+                            <?php echo $errors['goodExists']; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($errors['somethingWrong'])): ?>
+                <div class="row mt-3">
+                    <div class="col">
+                        <div class="alert alert-danger my-2 w-100 text-center">
+                            <i class="bi bi-exclamation-diamond-fill"></i>
+                            <?php echo $errors['somethingWrong']; ?>
                         </div>
                     </div>
                 </div>
