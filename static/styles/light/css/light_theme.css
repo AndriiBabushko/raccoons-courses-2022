@@ -350,9 +350,8 @@
   z-index: 2 !important;
 }
 .card:hover {
-  background-color: #a1a1a1;
-  border-color: lightgrey;
-  color: white;
+  background-color: lightgrey;
+  border-color: black;
   transform: scale(0.95);
 }
 

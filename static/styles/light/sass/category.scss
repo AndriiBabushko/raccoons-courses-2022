@@ -9,9 +9,8 @@
   z-index: 2!important;
 
   &:hover {
-    background-color: $post_grey;
-    border-color: $light_grey;
-    color: white;
+    background-color: $light_grey;
+    border-color: black;
     transform: scale(0.95);
   }
 }
