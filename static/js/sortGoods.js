@@ -12,11 +12,10 @@ const getGoodsData = () => {
 
         obj['short_description'] = cards[i].querySelector('.card-text').innerHTML;
 
-        const viewAddButtons = document.querySelector('.view-cart-buttons');
+        const viewAddButtons = cards[i].querySelector('.view-cart-buttons');
         if (viewAddButtons !== null) {
-            const buttons = viewAddButtons.querySelectorAll('.card-link');
-            const viewButton = buttons[0];
-            const cartButton = buttons[1];
+            const viewButton = viewAddButtons.querySelector('.card-link:nth-child(1)');
+            const cartButton = viewAddButtons.querySelector('.card-link:nth-child(2)');
 
             obj['viewButtonText'] = viewButton.innerHTML;
             obj['viewButtonHref'] = viewButton.getAttribute('href');
@@ -49,7 +48,6 @@ const getGoodsData = () => {
 
 const createGoodsCards = data => {
     const cardsBlock = document.createElement('div');
-    console.log(data);
 
     for (let i = 0; i < data.length; i++) {
         const userHr = document.createElement('hr');
@@ -131,6 +129,7 @@ const createGoodsCards = data => {
 
 const sortGoods = (orderBy, sortingType) => {
     const data = getGoodsData();
+    console.log(data);
 
     if (orderBy === 'name' && sortingType === 'ascendingSort') {
         data.sort((obj1, obj2) => (obj1.name.localeCompare(obj2.name)) ? -1 : (obj2.name.localeCompare(obj1.name)) ? 1 : 0);
