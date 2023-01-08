@@ -7,9 +7,11 @@ use core\Core;
 use core\Utils;
 use models\Cart;
 use models\Category;
+use models\Comment;
 use models\Error;
 use models\Good;
 use models\User;
+use models\Video;
 
 class CoursesController extends Controller
 {
@@ -64,28 +66,65 @@ class CoursesController extends Controller
         ]);
     }
 
-    public function viewAction(array $params): bool|string
+    public function viewAction(array $params): Error|bool|string
     {
+        if (!User::isUserAuth())
+            $this->redirect("user/$this->language/login");
+
+        $errors = [];
+        $currentUser = User::getCurrentAuthUser();
+
         if (!empty($params)) {
             $id_good = $params[0];
-            $errors = [];
 
             if (is_numeric($id_good)) {
                 $good = Good::getGoodById($id_good);
-                if ($good) {
 
-                } else {
+                if ($good) {
+                    $courseAccess = User::getGoodBoughtStatus($id_good, $currentUser['id_user']);
+
+                    if ($courseAccess) {
+                        if (isset($_GET['id_video'])) {
+                            $id_video = intval($_GET['id_video']);
+                            Video::turnOfVisibleVideoByGoodId($id_good);
+                            Video::updateVideoByVideoId($id_video, [
+                                'is_visible' => 1
+                            ]);
+                            $currentVideo = Video::getVideoByVideoId($id_video);
+                        } else
+                            $currentVideo = Video::getVisibleVideoByGoodId($id_good);
+                    } else
+                        $currentVideo = Video::getVisibleVideoByGoodId($id_good);
+
+                    $isAdmin = boolval($currentUser['is_admin']);
+                    $goodImgName = $good['photo'];
+                    $courseMaker = User::getUserById(intval($good['id_user']));
+                    $comments = Comment::getCommentsByGoodId($id_good);
+                    $videos = Video::getVideosByGoodId($id_good);
+
+                    return $this->render(null, [
+                        'idGood' => $id_good,
+                        'isAdmin' => $isAdmin,
+                        'goodImgName' => $goodImgName,
+                        'videos' => $videos,
+                        'currentVideo' => $currentVideo,
+                        'comments' => $comments,
+                        'courseMaker' => $courseMaker,
+                        'courseAccess' => $courseAccess,
+                        'errors' => $errors
+                    ]);
+                } else
                     $errors += Utils::generateMessage('notExist', [
-                        'ukr' => 'Помилка! Категорія не існує!',
+                        'ukr' => 'Помилка! Товару не існує!',
                         'eng' => 'Error! Category does not exist!'
                     ]);
-                }
-            } else {
-
-            }
+            } else
+                return $this->error(404);
         }
 
-        return $this->render();
+        return $this->render(null, [
+            'errors' => $errors
+        ]);
     }
 
     public function addAction(): Error|bool|string
