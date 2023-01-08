@@ -5,6 +5,7 @@ namespace controllers;
 use core\Controller;
 use core\Utils;
 use models\Cart;
+use models\Error;
 use models\Good;
 use models\User;
 
@@ -67,7 +68,7 @@ class CartController extends Controller
         }
 
         $cartGoods = Cart::getCartGoodsByUserID($id_user);
-        if($cartGoods != null)
+        if ($cartGoods != null)
             return $this->render(null, [
                 'errors' => $errors,
                 'goods' => unserialize($cartGoods)
@@ -92,6 +93,14 @@ class CartController extends Controller
             $goods = unserialize($cartGoods);
 
         if (!empty($goods)) {
+            $boughtGoods = User::getBoughtGoodsByUserID($id_user);
+            if ($boughtGoods !== null) {
+                $boughtGoods = unserialize($boughtGoods);
+                foreach ($boughtGoods as $boughtGood)
+                    if(is_array($boughtGood))
+                        $goods[] = $boughtGood;
+            }
+            
             $updateUserGoodsStatus = User::updateUser($id_user, ['bought_goods' => serialize($goods)]);
 
             if (!$updateUserGoodsStatus) {
