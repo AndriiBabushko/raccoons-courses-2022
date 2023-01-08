@@ -31,10 +31,21 @@ class Utils
         return $errors;
     }
 
-    public static function checkImgExtension(string $imgName) {
+    public static function checkImgExtension(string $imgName): bool
+    {
         $explodeArray = explode('.', $imgName);
         $extension = end($explodeArray);
         if ($extension === 'png' || $extension === 'jpg')
+            return true;
+
+        return false;
+    }
+
+    public static function checkVideoExtension(string $videoName): bool
+    {
+        $explodeArray = explode('.', $videoName);
+        $extension = end($explodeArray);
+        if ($extension === 'mp4')
             return true;
 
         return false;
