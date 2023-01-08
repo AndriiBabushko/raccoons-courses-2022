@@ -5,8 +5,6 @@ use models\User;
 /**
  * @var bool $updateStatus
  * @var bool $deleteStatus
- * @var string $language
- * @var string $theme
  */
 
 $user = null;
@@ -14,6 +12,7 @@ $user = null;
 if (User::isUserAuth())
     $user = User::getCurrentAuthUser();
 ?>
+
 <div class="settings_block">
     <div class="container-fluid">
         <form action="" method="post" enctype="multipart/form-data" id="accountForm" class="">
@@ -28,7 +27,7 @@ if (User::isUserAuth())
                                     <div class="d-flex flex-column align-items-center justify-content-between" id="userAvatarBlock">
                                         <?php
 
-                                        $userName = "Unknown user";
+                                        $userName = "Невідомий користувач";
                                         if (!empty($user)):
                                             $userName = ucfirst($user['first_name']) . " " . ucfirst($user['last_name'])
                                             ?>
@@ -49,7 +48,7 @@ if (User::isUserAuth())
                                                     alt='default_user_img'
                                                     class='rounded-circle'
                                                     id='avatarImg'
-                                                    title='Unknown user'>
+                                                    title='Невідомий користувач'>
                                             <div class="" id="figCaption">
                                                 <i class="bi bi-camera text-white"></i>
                                             </div>
@@ -65,19 +64,19 @@ if (User::isUserAuth())
                             <?php if (!empty($user)): ?>
                                 <li class="nav-item w-100 settings-item">
                                     <a href="#" class="nav-link settings-link link-dark align-middle px-0 d-flex justify-content-center align-items-center activeItem">
-                                        <i class="fs-4 bi-person-circle"></i> <span class="ms-1 d-none d-sm-inline">Account</span>
+                                        <i class="fs-4 bi-person-circle"></i> <span class="ms-1 d-none d-sm-inline">Профіль</span>
                                     </a>
                                 </li>
                             <?php endif; ?>
                             <li class="nav-item w-100 settings-item">
                                 <a href="#" class="nav-link settings-link link-dark align-middle px-0 d-flex justify-content-center align-items-center">
-                                    <i class="fs-4 bi-laptop"></i> <span class="ms-1 d-none d-sm-inline">Appearance</span>
+                                    <i class="fs-4 bi-laptop"></i> <span class="ms-1 d-none d-sm-inline">Зовнішній вигляд</span>
                                 </a>
                             </li>
                             <?php if (!empty($user)): ?>
                                 <li class="nav-item w-100 settings-item">
                                     <a href="#" class="nav-link settings-link link-dark align-middle px-0 d-flex justify-content-center align-items-center">
-                                        <i class="fs-4 bi-door-open"></i> <span class="ms-1 d-none d-sm-inline">Logout</span>
+                                        <i class="fs-4 bi-door-open"></i> <span class="ms-1 d-none d-sm-inline">Вихід</span>
                                     </a>
                                 </li>
                             <?php endif; ?>
@@ -88,62 +87,62 @@ if (User::isUserAuth())
                 <div class="col p-4" id="contentContainer">
                     <?php if (!empty($user)): ?>
                         <div class="d-flex flex-column" id="accountSettings">
-                            <h3 class="h3 border-bottom pb-2">Account settings</h3>
+                            <h3 class="h3 border-bottom pb-2">Налаштування профілю</h3>
                             <div class="d-flex flex-wrap justify-content-between my-2">
                                 <div class="settings-group position-relative">
-                                    <label for="textFirstName" id="labelFirstName" class="label">First name</label>
+                                    <label for="textFirstName" id="labelFirstName" class="label">Ім'я</label>
                                     <input type="text" name="first_name" id="textFirstName" class="input form__text_first_name form-control form-control-lg h-25"
                                            aria-describedby="firstNameHelpBlock" value="<?php echo trim($user['first_name']); ?>">
 
                                     <div id="firstNameHelpBlock" class="form-text text-wrap">
-                                        Your first name mustn't contain numbers and has length less than 2.
+                                        Ваше ім'я не повинно містити цифр і мати довжину менше ніж 2.
                                     </div>
                                 </div>
 
                                 <div class="settings-group">
-                                    <label for="textLastName" id="labelLastName" class="label">Last name</label>
+                                    <label for="textLastName" id="labelLastName" class="label">Прізвище</label>
                                     <input type="text" name="last_name" id="textLastName" class="input form__text_last_name form-control form-control-lg h-25"
                                            aria-describedby="lastNameHelpBlock" value="<?php echo trim($user['last_name']); ?>">
 
                                     <div id="lastNameHelpBlock" class="form-text text-wrap">
-                                        Your last name mustn't contain numbers and has length less than 2.
+                                        Ваше прізвище не повинно містити цифр і мати довжину менше ніж 2.
                                     </div>
                                 </div>
 
                                 <div class="settings-group">
-                                    <label for="email" id="labelEmail" class="label">Email</label>
+                                    <label for="email" id="labelEmail" class="label">Електронна пошта</label>
                                     <input type="email" name="email" id="email" class="input form__email form-control form-control-lg h-25"
                                            aria-describedby="emailHelpBlock" value="<?php echo trim($user['email']); ?>">
 
                                     <div id="emailHelpBlock" class="form-text text-wrap">
-                                        Your email must be written in appropriate format.
+                                        Ваш електронний лист має бути написаний у відповідному форматі.
                                     </div>
                                 </div>
 
                                 <div class="settings-group">
-                                    <label for="phoneNumber" id="labelPhoneNumber" class="label">Phone number</label>
+                                    <label for="phoneNumber" id="labelPhoneNumber" class="label">Номер телефону</label>
                                     <input type="tel" name="phone_number" id="phoneNumber" class="input form__phone_number form-control form-control-lg h-25"
                                            aria-describedby="phoneNumberHelpBlock" value="<?php echo trim($user['phone_number']); ?>">
 
                                     <div id="phoneNumberHelpBlock" class="form-text text-wrap">
-                                        Your phone number must be written in appropriate format.
+                                        Ваш номер телефону повинен бути написаний у відповідному форматі.
                                     </div>
                                 </div>
 
                                 <div class="settings-group" id="textareaGroup">
-                                    <label for="textareaBio" id="labelTextarea" class="label">Bio</label>
+                                    <label for="textareaBio" id="labelTextarea" class="label">Біографія</label>
                                     <textarea class="input form-control" name="bio" id="textareaBio"
                                               rows="3" aria-describedby="bioHelpBlock"><?php echo trim($user['bio']); ?></textarea>
 
                                     <div id="bioHelpBlock" class="form-text text-wrap">
-                                        This is your bio. You can write here any information about yourself.
+                                        Це ваша біографія. Тут ви можете написати будь-яку інформацію про себе.
                                     </div>
                                 </div>
 
                                 <div class="settings-group" id="buttonGroup">
-                                    <button class="btn btn-primary btn-outline-light" id="buttonUpdate" type="submit">Update user</button>
-                                    <a class="btn btn-danger btn-outline-light" id="buttonDelete" href="/settings/eng/deleteUser">Delete user</a>
-                                    <button class="btn btn-secondary" id="buttonClear" type="button">Clear fields</button>
+                                    <button class="btn btn-primary btn-outline-light" id="buttonUpdate" type="submit">Оновити користувача</button>
+                                    <a class="btn btn-danger btn-outline-light" id="buttonDelete" href="/settings/eng/deleteUser">Видалити користувача</a>
+                                    <button class="btn btn-secondary" id="buttonClear" type="button">Очистити поля</button>
                                 </div>
                             </div>
                         </div>
@@ -151,10 +150,10 @@ if (User::isUserAuth())
 
                     <div id="appearanceSettings">
                         <div class="d-flex flex-column w-100">
-                            <h3 class="h3 border-bottom pb-2">Appearance settings</h3>
+                            <h3 class="h3 border-bottom pb-2">Налаштування зовнішнього вигляду</h3>
                             <div class="d-flex flex-wrap flex-column justify-content-between" id="appearanceSettingsMenu">
                                 <div class="d-flex flex-column my-2">
-                                    <p id="textLanguageDropdown" class="text-black text-wrap tex">Choose language</p>
+                                    <p id="textLanguageDropdown" class="text-black text-wrap tex">Виберіть мову</p>
                                     <div class="dropdown">
                                         <a
                                                 class="btn btn-light dropdown-toggle mt-1"
@@ -190,7 +189,6 @@ if (User::isUserAuth())
                                                 alt="Ukraine">
                                             ';
                                             }
-
 
                                             if (!empty($language)) {
                                                 if (isset($_GET['language']) && $_GET['language'] == 'eng' || $language == 'eng')
@@ -237,7 +235,7 @@ if (User::isUserAuth())
                                 </div>
 
                                 <div class="d-flex flex-column my-2">
-                                    <p id="textThemeDropdown" class="text-black text-wrap">Choose theme</p>
+                                    <p id="textThemeDropdown" class="text-black text-wrap">Виберіть тему</p>
                                     <div class="dropdown">
                                         <a
                                                 class="btn btn-secondary dropdown-toggle mt-1"
@@ -276,7 +274,7 @@ if (User::isUserAuth())
                                             <li>
                                                 <a class="dropdown-item" href="?theme=light">
                                                     <?php outputLightTheme(); ?>
-                                                    Light
+                                                    Світла
                                                     <?php
                                                     if (!empty($theme) && $theme == 'light')
                                                         echo '<i class="bi bi-check text-success fs-4"></i>';
@@ -291,7 +289,7 @@ if (User::isUserAuth())
                                             <li>
                                                 <a class="dropdown-item" href="?theme=dark">
                                                     <?php outputDarkTheme(); ?>
-                                                    Dark
+                                                    Темна
                                                     <?php
                                                     if (!empty($theme) && $theme == 'dark')
                                                         echo '<i class="bi bi-check text-success fs-4"></i>';
@@ -308,10 +306,10 @@ if (User::isUserAuth())
                     <?php if (!empty($user)): ?>
                         <div id="logoutSettings">
                             <div class="d-flex flex-column" id="logoutSettings">
-                                <h3 class="h3">Logout settings</h3>
+                                <h3 class="h3">Налаштування виходу</h3>
                                 <div class="d-flex flex-column">
-                                    <p id="textButtonLogout" class="text-black text-wrap">Are you sure to logout?</p>
-                                    <a href="/user/eng/logout" class="btn btn-danger" id="buttonLogout">Logout</a>
+                                    <p id="textButtonLogout" class="text-black text-wrap">Ви впевнені, що виходите з системи?</p>
+                                    <a href="/user/eng/logout" class="btn btn-danger" id="buttonLogout">Вийти</a>
                                 </div>
                             </div>
                         </div>
@@ -322,5 +320,5 @@ if (User::isUserAuth())
     </div>
 </div>
 
-<script defer> <?php require_once 'static/js/settings.js'; ?></script>
-<script defer> <?php require_once 'static/js/validation.js'; ?></script>
+<script> <?php include_once('static/js/settings.js'); ?></script>
+<script> <?php include_once('static/js/validation.js'); ?></script>

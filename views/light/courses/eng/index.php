@@ -80,22 +80,27 @@ if (User::isUserAuth())
                     <?php foreach ($goods as $good): ?>
                         <div class="col">
                             <div class="card border-2">
+                                <?php if( $good['photo'] !== 'no_image.png'): ?>
                                 <img src="/static/img/courses/<?php echo $good['photo']; ?>" class="card-img-top" alt="<?php echo $good['photo']; ?>">
+                                <?php endif; ?>
+                                <?php if( $good['photo'] === 'no_image.png'): ?>
+                                    <img src="/static/img/<?php echo $good['photo']; ?>" class="card-img-top" alt="<?php echo $good['photo']; ?>">
+                                <?php endif; ?>
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $good['name']; ?></h5>
                                     <p class="card-subtitle">Price <span class="price"><?php echo $good['price']; ?></span> UAH</p>
                                     <hr>
                                     <p class="card-text"><?php echo $good['short_description']; ?></p>
-                                    <div class="d-flex justify-content-between view-cart-buttons">
-                                        <a class="btn btn-secondary card-link" href="/courses/eng/view/<?php echo $good['id_good']; ?>">
-                                            View good
-                                        </a>
-                                        <?php if (!empty($user)): ?>
+                                    <?php if (!empty($user)): ?>
+                                        <div class="d-flex justify-content-between view-cart-buttons">
+                                            <a class="btn btn-secondary card-link" href="/courses/eng/view/<?php echo $good['id_good']; ?>">
+                                                View good
+                                            </a>
                                             <a class="btn btn-success card-link" href="/cart/eng/index?id_good=<?php echo $good['id_good']; ?>">
                                                 Add to cart
                                             </a>
-                                        <?php endif; ?>
-                                    </div>
+                                        </div>
+                                    <?php endif; ?>
                                     <?php if (!empty($user) && $user['is_admin'] === 1): ?>
                                         <hr>
                                         <div class="d-flex justify-content-between admin-buttons">
