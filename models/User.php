@@ -29,10 +29,10 @@ class User
 
         $userPhotoName = self::getUserById($id_user)['avatar'];
         $userPhotoPath = "static/img/user/$userPhotoName";
-        if(file_exists($userPhotoPath) && $userPhotoName !== "no_image.png")
+        if (file_exists($userPhotoPath) && $userPhotoName !== "no_image.png")
             unlink($userPhotoPath);
 
-        if(!file_exists("static/img/user/$imgName")) {
+        if (!file_exists("static/img/user/$imgName")) {
             $newImgPath = "static/img/user/$imgName";
             $userUpdateData += ['avatar' => $imgName];
             move_uploaded_file($imgPath, $newImgPath);
@@ -50,7 +50,7 @@ class User
         $avatarName = self::getUserById($id_user)['avatar'];
         $avatarPath = "static/img/category/$avatarName";
 
-        if(file_exists($avatarPath))
+        if (file_exists($avatarPath))
             unlink($avatarPath);
 
         return Core::getInstance()->db->delete(self::$tableName, [
@@ -68,6 +68,21 @@ class User
             return $cart[0]['bought_goods'];
 
         return null;
+    }
+
+    public static function getGoodBoughtStatus(int $id_good, int $id_user): bool
+    {
+        $userBoughtGoods = self::getBoughtGoodsByUserID($id_user);
+
+        if ($userBoughtGoods !== null) {
+            $userBoughtGoods = unserialize($userBoughtGoods);
+
+            foreach ($userBoughtGoods as $userBoughtGood)
+                if ($userBoughtGood['id_good'] == $id_good)
+                    return true;
+        }
+
+        return false;
     }
 
     public static function isEmailExists(string $email): bool
@@ -148,7 +163,7 @@ class User
 
     public static function isAdmin(): bool
     {
-        if(self::isUserAuth())
+        if (self::isUserAuth())
             return self::getCurrentAuthUser()['is_admin'] === 1;
 
         return false;
