@@ -1,9 +1,13 @@
-@import "index", "navbar", "side_navbar", "settings", "auth_forms", "category", "category_forms", "courses", "courses_forms", "cart";
+@import "index", "navbar", "side_navbar", "settings", "auth_forms", "category", "category_forms", "courses", "courses_forms", "video_forms", "cart", "view_course";
 
 *, *:before, *:after {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 .header {
