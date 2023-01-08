@@ -1,0 +1,27 @@
+@import "variables", "video";
+
+.view-video-menu {
+  border-top: 2px solid $light_grey;
+  border-right: 2px solid $light_grey;
+  border-left: 2px solid $light_grey;
+  background-image: url('/static/img/category/form_pattern_2.jpg');
+  background-position: center;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-maker {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#courseMakerImg {
+  border: 2px solid transparent;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
+  transition: all ease-in-out .3s;
+  width: 120px;
+  height: 120px;
+}
