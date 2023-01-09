@@ -12,6 +12,13 @@ const getGoodsData = () => {
 
         obj['short_description'] = cards[i].querySelector('.card-text').innerHTML;
 
+        obj['comments_text'] = cards[i].querySelector('.comments-count').innerHTML;
+        const countSpan = cards[i].querySelector('.comments-count .count');
+        if(countSpan !== null)
+            obj['comments_count'] = countSpan.innerHTML;
+        else
+            obj['comments_count'] = 0;
+
         const viewAddButtons = cards[i].querySelector('.view-cart-buttons');
         if (viewAddButtons !== null) {
             const viewButton = viewAddButtons.querySelector('.card-link:nth-child(1)');
@@ -67,6 +74,10 @@ const createGoodsCards = data => {
         viewCartButtonsContainer.classList.add('d-flex', 'justify-content-between', 'view-cart-buttons');
         viewCartButtonsContainer.append(viewButton, cartButton);
 
+        const commentsCount = document.createElement('p');
+        commentsCount.classList.add('card-text', 'comments-count');
+        commentsCount.innerHTML = data[i]['comments_text'];
+
         const cardText = document.createElement('p');
         cardText.classList.add('card-text');
         cardText.innerHTML = data[i]['short_description'];
@@ -103,9 +114,9 @@ const createGoodsCards = data => {
             adminButtonsContainer.classList.add('d-flex', 'justify-content-between', 'admin-buttons');
             adminButtonsContainer.append(updateButton, deleteButton);
 
-            cardBody.append(cardTitle, cardSubtitle, userHr, cardText, viewCartButtonsContainer, adminHr, adminButtonsContainer);
+            cardBody.append(cardTitle, cardSubtitle, userHr, cardText, commentsCount, viewCartButtonsContainer, adminHr, adminButtonsContainer);
         } else {
-            cardBody.append(cardTitle, cardSubtitle, userHr, cardText, viewCartButtonsContainer);
+            cardBody.append(cardTitle, cardSubtitle, userHr, cardText, commentsCount, viewCartButtonsContainer);
         }
 
         const img = document.createElement('img');
@@ -153,6 +164,14 @@ const sortGoods = (orderBy, sortingType) => {
 
     if (orderBy === 'short_description' && sortingType === 'descendingSort') {
         data.sort((obj1, obj2) => (obj2.short_description.localeCompare(obj1.short_description)) ? -1 : (obj1.short_description.localeCompare(obj2.short_description)) ? 1 : 0);
+    }
+
+    if (orderBy === 'comments' && sortingType === 'ascendingSort') {
+        data.sort((obj1, obj2) => (obj1.comments_count < obj2.comments_count) ? -1 : (obj1.comments_count > obj2.comments_count) ? 1 : 0);
+    }
+
+    if (orderBy === 'comments' && sortingType === 'descendingSort') {
+        data.sort((obj1, obj2) => (obj1.comments_count > obj2.comments_count) ? -1 : (obj1.comments_count < obj2.comments_count) ? 1 : 0);
     }
 
     return data;
