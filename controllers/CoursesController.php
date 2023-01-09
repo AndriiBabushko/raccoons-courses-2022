@@ -5,6 +5,7 @@ namespace controllers;
 use core\Controller;
 use core\Core;
 use core\Utils;
+use JetBrains\PhpStorm\NoReturn;
 use models\Cart;
 use models\Category;
 use models\Comment;
@@ -32,8 +33,14 @@ class CoursesController extends Controller
 
                 if ($category) {
                     if ($goods) {
+                        $goodsWithComments = [];
+                        foreach ($goods as $good) {
+                            $good['comments_count']= count(Comment::getCommentsByGoodId($good['id_good']));
+                            $goodsWithComments[] = $good;
+                        }
+                        
                         return $this->render(null, [
-                            'goods' => $goods
+                            'goods' => $goodsWithComments
                         ]);
                     } else {
                         $errors += Utils::generateMessage('noGoods', [
@@ -60,9 +67,14 @@ class CoursesController extends Controller
         }
 
         $goods = Good::getGoods();
+        $goodsWithComments = [];
+        foreach ($goods as $good) {
+            $good['comments_count']= count(Comment::getCommentsByGoodId($good['id_good']));
+            $goodsWithComments[] = $good;
+        }
 
         return $this->render(null, [
-            'goods' => $goods
+            'goods' => $goodsWithComments
         ]);
     }
 
@@ -72,18 +84,34 @@ class CoursesController extends Controller
             $this->redirect("user/$this->language/login");
 
         $errors = [];
+        $model = [];
         $currentUser = User::getCurrentAuthUser();
 
         if (!empty($params)) {
             $id_good = $params[0];
+            $id_user = $currentUser['id_user'];
+
+            if (Core::getInstance()->requestMethod === 'POST') {
+                $model = $_POST + ['id_good' => $id_good, 'id_user' => $id_user];
+
+                if (!Comment::isCommentExist($model['comment']))
+                    $commentStatus = Comment::addComment($model);
+                else
+                    $errors += Utils::generateMessage('commentError', [
+                        'ukr' => 'Помилка! Коментар вже існує :(',
+                        'eng' => 'Error! Comment already exists :('
+                    ]);
+            }
 
             if (is_numeric($id_good)) {
                 $good = Good::getGoodById($id_good);
 
                 if ($good) {
                     $courseAccess = User::getGoodBoughtStatus($id_good, $currentUser['id_user']);
+                    $courseMaker = User::getUserById(intval($good['id_user']));
+                    $isCourseMaker = boolval($currentUser['id_user'] == $courseMaker['id_user']);
 
-                    if ($courseAccess) {
+                    if ($courseAccess || $isCourseMaker) {
                         if (isset($_GET['id_video'])) {
                             $id_video = intval($_GET['id_video']);
                             Video::turnOfVisibleVideoByGoodId($id_good);
@@ -96,21 +124,28 @@ class CoursesController extends Controller
                     } else
                         $currentVideo = Video::getVisibleVideoByGoodId($id_good);
 
-                    $isAdmin = boolval($currentUser['is_admin']);
+
                     $goodImgName = $good['photo'];
-                    $courseMaker = User::getUserById(intval($good['id_user']));
-                    $comments = Comment::getCommentsByGoodId($id_good);
                     $videos = Video::getVideosByGoodId($id_good);
+                    $comments = Comment::getCommentsByGoodId($id_good);
+                    $usersAndComments = [];
+                    if (!empty($comments))
+                        foreach ($comments as $comment) {
+                            $comment += User::getUserById($comment['id_user']);
+                            $usersAndComments[] = $comment;
+                        }
 
                     return $this->render(null, [
                         'idGood' => $id_good,
-                        'isAdmin' => $isAdmin,
+                        'isCourseMaker' => $isCourseMaker,
                         'goodImgName' => $goodImgName,
                         'videos' => $videos,
                         'currentVideo' => $currentVideo,
-                        'comments' => $comments,
+                        'comments' => $usersAndComments,
                         'courseMaker' => $courseMaker,
+                        'currentUser' => $currentUser,
                         'courseAccess' => $courseAccess,
+                        'model' => $model,
                         'errors' => $errors
                     ]);
                 } else
@@ -124,6 +159,24 @@ class CoursesController extends Controller
 
         return $this->render(null, [
             'errors' => $errors
+        ]);
+    }
+
+    public function deleteCommentAction(): bool|string
+    {
+        $id_good = null;
+
+        if (isset($_GET['id_comment']) && isset($_GET['id_good'])) {
+            $id_comment = $_GET['id_comment'];
+            $id_good = $_GET['id_good'];
+            $commentStatus = Comment::deleteCommentByCommentId($id_comment);
+
+            if ($commentStatus)
+                $this->redirect("/courses/$this->language/view/$id_good");
+        }
+
+        return $this->renderView('deleteCommentError', [
+            'id_good' => $id_good
         ]);
     }
 
@@ -183,83 +236,94 @@ class CoursesController extends Controller
         if (!User::isAdmin())
             return $this->error(403);
 
-        $id_good = $_GET['id_good'];
-        $categories = Category::getCategories();
-        $good = Good::getGoodById(intval($id_good));
         $errors = [];
-        $model = $_POST;
+        $model = [];
 
-        if ($categories) {
-            if (Core::getInstance()->requestMethod === 'POST') {
-                if (empty($_FILES['photo']['name']) || Utils::checkImgExtension($_FILES['photo']['name'])) {
-                    $updateGoodStatus = Good::updateGood($id_good, $model, $_FILES['photo']['tmp_name'], $_FILES['photo']['name']);
-                    $good = Good::getGoodById(intval($id_good));
+        if(isset( $_GET['id_good'])) {
+            $id_good = $_GET['id_good'];
+            $categories = Category::getCategories();
+            $good = Good::getGoodById(intval($id_good));
 
-                    if ($updateGoodStatus) {
-                        $id_user = intval(User::getCurrentAuthUser()['id_user']);
-                        $cartGoods = Cart::getCartGoodsByUserID($id_user);
-                        $userGoods = User::getBoughtGoodsByUserID($id_user);
+            if ($categories) {
+                if (Core::getInstance()->requestMethod === 'POST') {
+                    $model = $_POST;
 
-                        if ($cartGoods !== null)
-                            $cartGoods = unserialize($cartGoods);
+                    if (empty($_FILES['photo']['name']) || Utils::checkImgExtension($_FILES['photo']['name'])) {
+                        $updateGoodStatus = Good::updateGood($id_good, $model, $_FILES['photo']['tmp_name'], $_FILES['photo']['name']);
+                        $good = Good::getGoodById(intval($id_good));
 
-                        if ($userGoods !== null)
-                            $userGoods = unserialize($userGoods);
+                        if ($updateGoodStatus) {
+                            $id_user = intval(User::getCurrentAuthUser()['id_user']);
+                            $cartGoods = Cart::getCartGoodsByUserID($id_user);
+                            $userGoods = User::getBoughtGoodsByUserID($id_user);
 
-                        if (!empty($cartGoods)) {
-                            $filterGoods = [];
-                            foreach ($cartGoods as $cartGood) {
-                                if (intval($cartGood['id_good']) == intval($_GET['id_good'])) {
-                                    $filterGoods[] = $good;
-                                } else
-                                    $filterGoods[] = $cartGood;
+                            if ($cartGoods !== null)
+                                $cartGoods = unserialize($cartGoods);
+
+                            if ($userGoods !== null)
+                                $userGoods = unserialize($userGoods);
+
+                            if (!empty($cartGoods)) {
+                                $filterGoods = [];
+                                foreach ($cartGoods as $cartGood) {
+                                    if (intval($cartGood['id_good']) == intval($_GET['id_good'])) {
+                                        $filterGoods[] = $good;
+                                    } else
+                                        $filterGoods[] = $cartGood;
+                                }
+
+                                $model = ['goods' => serialize($filterGoods)];
+                                Cart::updateCartByUserID($id_user, $model);
                             }
 
-                            $model = ['goods' => serialize($filterGoods)];
-                            Cart::updateCartByUserID($id_user, $model);
-                        }
+                            if (!empty($userGoods)) {
+                                $filterGoods = [];
+                                foreach ($userGoods as $userGood) {
+                                    if (intval($userGood['id_good']) == intval($_GET['id_good'])) {
+                                        $filterGoods[] = $good;
+                                    } else
+                                        $filterGoods[] = $userGood;
+                                }
 
-                        if (!empty($userGoods)) {
-                            $filterGoods = [];
-                            foreach ($userGoods as $userGood) {
-                                if (intval($userGood['id_good']) == intval($_GET['id_good'])) {
-                                    $filterGoods[] = $good;
-                                } else
-                                    $filterGoods[] = $userGood;
+                                $model = ['bought_goods' => serialize($filterGoods)];
+                                User::updateUser($id_user, $model);
                             }
 
-                            $model = ['bought_goods' => serialize($filterGoods)];
-                            User::updateUser($id_user, $model);
+                            return $this->renderView('updateGoodStatus', [
+                                'updateStatus' => true
+                            ]);
                         }
 
                         return $this->renderView('updateGoodStatus', [
-                            'updateStatus' => true
+                            'updateStatus' => false
+                        ]);
+                    } else {
+                        $errors += Utils::generateMessage('photo', [
+                            'ukr' => 'Розширення файлу неправильне! Завантажте будь-ласка фотографію.',
+                            'eng' => 'File extension is wrong! Please download the photo.'
                         ]);
                     }
-
-                    return $this->renderView('updateGoodStatus', [
-                        'updateStatus' => false
-                    ]);
-                } else {
-                    $errors += Utils::generateMessage('photo', [
-                        'ukr' => 'Розширення файлу неправильне! Завантажте будь-ласка фотографію.',
-                        'eng' => 'File extension is wrong! Please download the photo.'
-                    ]);
                 }
-            }
 
-            return $this->render(null, [
-                'model' => $model,
-                'good' => $good,
-                'categories' => $categories,
-                'errors' => $errors
-            ]);
+                return $this->render(null, [
+                    'model' => $model,
+                    'good' => $good,
+                    'categories' => $categories,
+                    'errors' => $errors
+                ]);
+            } else {
+                $errors += Utils::generateMessage('somethingWrong', [
+                    'ukr' => 'Щось пішло не так! Спробуйте ще раз!',
+                    'eng' => 'Something went wrong! Try again!'
+                ]);
+            }
         } else {
             $errors += Utils::generateMessage('somethingWrong', [
                 'ukr' => 'Щось пішло не так! Спробуйте ще раз!',
                 'eng' => 'Something went wrong! Try again!'
             ]);
         }
+
 
         return $this->render(null, [
             'errors' => $errors
