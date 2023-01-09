@@ -10,5 +10,6 @@ const sidebarCollapse = document.querySelector('#sidebarCollapse');
 const sidebar = document.querySelector('#sidebar');
 
 sidebarCollapse.addEventListener('click', () => {
+    sidebar.parentElement.classList.add('sidebar-col');
     addRemoveId(sidebar.parentElement, 'sidebarCol');
 });

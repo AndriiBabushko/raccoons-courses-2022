@@ -5,7 +5,6 @@ namespace controllers;
 use core\Controller;
 use core\Core;
 use core\Utils;
-use JetBrains\PhpStorm\NoReturn;
 use models\Cart;
 use models\Category;
 use models\Comment;

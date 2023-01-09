@@ -12,7 +12,7 @@ if (User::isUserAuth())
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-xl-2 col-lg-2 col-md-3 col-sm-12 p-0 sidebar-col" id="sidebarCol">
+        <div class="col-12 col-xl-2 col-lg-2 col-md-3 col-sm-12 p-0" id="sidebarCol">
             <nav class="navbar navbar-light navbar-bg" id="sidebar">
                 <div class="w-100 py-2" id="sidebarNav">
                     <ul class="navbar-nav" id="sidebarUl">
