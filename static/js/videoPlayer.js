@@ -140,8 +140,6 @@ playPauseBtn.addEventListener('click', event => togglePlay(video));
 
 video.addEventListener('click', event => togglePlay(video));
 
-video.addEventListener('click', event => togglePlay(video));
-
 video.addEventListener('play', event => {
     videoContainer.classList.remove('paused');
 });
@@ -150,31 +148,30 @@ video.addEventListener('pause', event => {
     videoContainer.classList.add('paused');
 });
 
-document.addEventListener('keydown', event => {
-    const tagName = document.activeElement.tagName.toLowerCase();
-
-    if (tagName === 'input') return;
-
-    switch (event.key.toLowerCase()) {
-        case " ":
-            if (tagName === 'button') return;
-        case "k":
-            event.preventDefault();
-            togglePlay(video);
-            break;
-        case "f":
-            fullScreenMode(videoContainer);
-            break;
-        case "m":
-            toggleMute(video);
-            break;
-        case "arrowleft":
-        case "j":
-            skip(-5, video);
-            break;
-        case "arrowright":
-        case "l":
-            skip(5, video);
-            break;
-    }
-});
+// document.addEventListener('keydown', event => {
+//     const tagName = document.activeElement.tagName.toLowerCase();
+//
+//     if (tagName === 'input') return;
+//
+//     switch (event.key.toLowerCase()) {
+//         case " ":
+//             if (tagName === 'button') return;
+//         case "k":
+//             togglePlay(video);
+//             break;
+//         case "f":
+//             fullScreenMode(videoContainer);
+//             break;
+//         case "m":
+//             toggleMute(video);
+//             break;
+//         case "arrowleft":
+//         case "j":
+//             skip(-5, video);
+//             break;
+//         case "arrowright":
+//         case "l":
+//             skip(5, video);
+//             break;
+//     }
+// });
