@@ -33,7 +33,7 @@ if (User::isUserAuth())
                                             $userName = ucfirst($user['first_name']) . " " . ucfirst($user['last_name'])
                                             ?>
                                             <img
-                                                    src='/static/img/user/<?php echo $user['avatar'] ?>'
+                                                    src='/static/img/<?php if ($user['avatar'] === 'default_user_img.png') echo $user['avatar']; else echo 'user/' . $user['avatar']; ?>'
                                                     alt='<?php echo $userName ?>'
                                                     class='rounded-circle'
                                                     id='avatarImg'

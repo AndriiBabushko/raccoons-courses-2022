@@ -29,6 +29,7 @@ if (User::isUserAuth())
                                     <option value="name">By Name</option>
                                     <option value="price">By Price</option>
                                     <option value="short_description">By Short Description</option>
+                                    <option value="comments">By Comments Count</option>
                                 </select>
                             </div>
                         </li>
@@ -91,6 +92,15 @@ if (User::isUserAuth())
                                     <p class="card-subtitle">Price <span class="price"><?php echo $good['price']; ?></span> UAH</p>
                                     <hr>
                                     <p class="card-text"><?php echo $good['short_description']; ?></p>
+                                    <p class="card-text comments-count">
+                                        <?php if($good['comments_count'] == 0):?>
+                                            No comments yet
+                                        <?php endif; ?>
+
+                                        <?php if($good['comments_count'] != 0):?>
+                                            <span class="count"><?php echo $good['comments_count']; ?> </span> comments from users
+                                        <?php endif; ?>
+                                    </p>
                                     <?php if (!empty($user)): ?>
                                         <div class="d-flex justify-content-between view-cart-buttons">
                                             <a class="btn btn-secondary card-link" href="/courses/eng/view/<?php echo $good['id_good']; ?>">
