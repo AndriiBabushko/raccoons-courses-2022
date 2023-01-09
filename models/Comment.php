@@ -52,4 +52,16 @@ class Comment
             'id_good' => $id_good
         ]);
     }
+
+    public static function isCommentExist(string $comment): bool
+    {
+        $comment =  Core::getInstance()->db->select(self::$tableName, '*', [
+            'comment' => $comment
+        ]);
+
+        if(empty($comment))
+            return false;
+
+        return true;
+    }
 }
