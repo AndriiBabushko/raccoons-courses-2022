@@ -81,6 +81,15 @@
   align-items: center;
 }
 
+.settings-link {
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+
+  &:hover {
+    background-color: $light_grey;
+    color: white;
+  }
+}
+
 #appearanceSettingsMenu {
   width: 100%;
 }

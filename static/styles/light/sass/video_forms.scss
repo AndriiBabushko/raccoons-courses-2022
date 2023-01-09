@@ -5,6 +5,7 @@
   background-image: url('/static/img/category/form_pattern_2.jpg');
   filter: blur(1px);
   -webkit-filter: blur(1px);
+  z-index: -1;
 }
 
 #videoAddForm, #videoUpdateForm, #videoDeleteForm {

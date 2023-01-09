@@ -10,6 +10,10 @@
   align-items: center;
 }
 
+.comments-count {
+  font-style: italic;
+}
+
 @media screen and (min-width: 576px) {
   #itemsContainer {
     justify-content: space-between;
