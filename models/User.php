@@ -169,6 +169,18 @@ class User
         return false;
     }
 
+    public static function isUserExistWithEmail(string $email): mixed
+    {
+        $user = Core::getInstance()->db->select(self::$tableName, '*', [
+            'email' => $email
+        ]);
+
+        if (!empty($user))
+            return true;
+
+        return false;
+    }
+
     public static function hashPassword(string $password): string
     {
         return md5($password);

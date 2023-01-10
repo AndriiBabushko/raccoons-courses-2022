@@ -5,9 +5,9 @@
  */
 ?>
 
-<div class="row">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 w-100 position-relative">
-        <div class="form-container d-flex justify-content-center" id="formContainer">
+<div class="row h-100">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 w-100 h-100 position-relative">
+        <div class="form-container d-flex justify-content-center align-items-center h-100" id="formContainer">
             <form action="" method="post" enctype="multipart/form-data" class="d-flex flex-column align-items-center justify-content-center position-relative" id="authForm">
                 <div id="authImg"></div>
 

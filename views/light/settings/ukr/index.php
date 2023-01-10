@@ -5,6 +5,8 @@ use models\User;
 /**
  * @var bool $updateStatus
  * @var bool $deleteStatus
+ * @var string $language
+ * @var string $theme
  */
 
 $user = null;
@@ -12,11 +14,10 @@ $user = null;
 if (User::isUserAuth())
     $user = User::getCurrentAuthUser();
 ?>
-
 <div class="settings_block">
     <div class="container-fluid">
         <form action="" method="post" enctype="multipart/form-data" id="accountForm" class="">
-            <div class="row flex-nowrap">
+            <div class="row flex-nowrap h-100">
                 <div class="col-auto col-md-3 col-xl-2 p-0" id="settingsMenu">
                     <div class="d-flex flex-column align-items-center align-items-sm-start">
                         <div class="w-100" id="userBlock">
@@ -64,7 +65,7 @@ if (User::isUserAuth())
                             <?php if (!empty($user)): ?>
                                 <li class="nav-item w-100 settings-item">
                                     <a href="#" class="nav-link settings-link link-dark align-middle px-0 d-flex justify-content-center align-items-center activeItem">
-                                        <i class="fs-4 bi-person-circle"></i> <span class="ms-1 d-none d-sm-inline">Профіль</span>
+                                        <i class="fs-4 bi-person-circle"></i> <span class="ms-1 d-none d-sm-inline">Аккаунт</span>
                                     </a>
                                 </li>
                             <?php endif; ?>
@@ -76,7 +77,7 @@ if (User::isUserAuth())
                             <?php if (!empty($user)): ?>
                                 <li class="nav-item w-100 settings-item">
                                     <a href="#" class="nav-link settings-link link-dark align-middle px-0 d-flex justify-content-center align-items-center">
-                                        <i class="fs-4 bi-door-open"></i> <span class="ms-1 d-none d-sm-inline">Вихід</span>
+                                        <i class="fs-4 bi-door-open"></i> <span class="ms-1 d-none d-sm-inline">Вийти</span>
                                     </a>
                                 </li>
                             <?php endif; ?>
@@ -115,7 +116,7 @@ if (User::isUserAuth())
                                            aria-describedby="emailHelpBlock" value="<?php echo trim($user['email']); ?>">
 
                                     <div id="emailHelpBlock" class="form-text text-wrap">
-                                        Ваш електронний лист має бути написаний у відповідному форматі.
+                                        Ваша електронна пошта має бути написана у відповідному форматі.
                                     </div>
                                 </div>
 
@@ -135,13 +136,13 @@ if (User::isUserAuth())
                                               rows="3" aria-describedby="bioHelpBlock"><?php echo trim($user['bio']); ?></textarea>
 
                                     <div id="bioHelpBlock" class="form-text text-wrap">
-                                        Це ваша біографія. Тут ви можете написати будь-яку інформацію про себе.
+                                        Це твоя біографія. Тут ви можете написати будь-яку інформацію про себе.
                                     </div>
                                 </div>
 
                                 <div class="settings-group" id="buttonGroup">
-                                    <button class="btn btn-primary btn-outline-light" id="buttonUpdate" type="submit">Оновити користувача</button>
-                                    <a class="btn btn-danger btn-outline-light" id="buttonDelete" href="/settings/eng/deleteUser">Видалити користувача</a>
+                                    <button class="btn btn-primary btn-outline-light" id="buttonUpdate" type="submit">Оновити профіль</button>
+                                    <a class="btn btn-danger btn-outline-light" id="buttonDelete" href="/settings/ukr/deleteUser">Видалити профіль</a>
                                     <button class="btn btn-secondary" id="buttonClear" type="button">Очистити поля</button>
                                 </div>
                             </div>
@@ -173,7 +174,7 @@ if (User::isUserAuth())
                                                 https://flagcdn.com/72x54/gb.png 3x"
                                                 width="24"
                                                 height="18"
-                                                alt="United Kingdom">
+                                                alt="Великобританія">
                                             ';
                                             }
 
@@ -186,9 +187,10 @@ if (User::isUserAuth())
                                                 https://flagcdn.com/72x54/ua.png 3x"
                                                 width="24"
                                                 height="18"
-                                                alt="Ukraine">
+                                                alt="Україна">
                                             ';
                                             }
+
 
                                             if (!empty($language)) {
                                                 if (isset($_GET['language']) && $_GET['language'] == 'eng' || $language == 'eng')
@@ -308,8 +310,8 @@ if (User::isUserAuth())
                             <div class="d-flex flex-column" id="logoutSettings">
                                 <h3 class="h3">Налаштування виходу</h3>
                                 <div class="d-flex flex-column">
-                                    <p id="textButtonLogout" class="text-black text-wrap">Ви впевнені, що виходите з системи?</p>
-                                    <a href="/user/eng/logout" class="btn btn-danger" id="buttonLogout">Вийти</a>
+                                    <p id="textButtonLogout" class="text-black text-wrap">Ви впевнені, що хочете вийти з системи?</p>
+                                    <a href="/user/ukr/logout" class="btn btn-danger" id="buttonLogout">Вийти</a>
                                 </div>
                             </div>
                         </div>
@@ -320,5 +322,5 @@ if (User::isUserAuth())
     </div>
 </div>
 
-<script> <?php include_once('static/js/settings.js'); ?></script>
-<script> <?php include_once('static/js/validation.js'); ?></script>
+<script defer> <?php require_once 'static/js/settings.js'; ?></script>
+<script defer> <?php require_once 'static/js/validation.js'; ?></script>

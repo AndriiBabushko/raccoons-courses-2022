@@ -1,0 +1,55 @@
+@import "variables", "mixins";
+
+// start general forms styles
+
+.title {
+  border-bottom: 2px solid white;
+}
+
+.label {
+  font-size: 24px;
+  font-weight: bold;
+  display: inline-block !important;
+}
+
+textarea {
+  max-height: 500px;
+}
+
+.form-group {
+  width: 100% !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-control, .form-select {
+  border-width: 3px;
+}
+
+.form-control {
+  &:focus {
+    border-color: $post_black;
+    box-shadow: 0 0 0 0.2rem $light_black;
+  }
+}
+
+.form-select {
+  &:focus {
+    border-color: $post_black;
+    box-shadow: 0 0 0 0.2rem $light_black;
+  }
+}
+
+.invalid-feedback {
+  font-weight: 500;
+}
+
+#content {
+  position: relative;
+  z-index: 2;
+  background-color: transparent;
+  width: 75%;
+}
+
+// end general forms styles

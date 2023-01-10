@@ -40,7 +40,7 @@ class Core
         if (isset($_GET['route'])) {
             $route = $_GET['route'];
             $routeParts = explode('/', $route);
-            if(count($routeParts) >= 3) {
+            if (count($routeParts) >= 3) {
                 $moduleName = strtolower(array_shift($routeParts));
                 $language = strtolower(array_shift($routeParts));
                 $actionName = strtolower(array_shift($routeParts));
@@ -53,21 +53,24 @@ class Core
             $actionName = 'index';
         }
 
-        if(!is_dir("themes/light/$language"))
-            $language = 'eng';
+        if (!empty($_GET['language']))
+            if ($_GET['language'] == 'eng' || $_GET['language'] == 'ukr')
+                $language = $_GET['language'];
 
-        if (isset($_GET['language']))
-            $language = $_GET['language'];
-
-        $theme = 'light';
-        if (isset($_GET['theme']))
-            $theme = $_GET['theme'];
 
         $this->app['moduleName'] = $moduleName;
         $this->app['actionName'] = $actionName;
         $this->app['language'] = $language;
-        $this->app['theme'] = $theme;
+        if (empty($_SESSION['theme']))
+            $this->app['theme'] = 'light';
+        else
+            $this->app['theme'] = $_SESSION['theme'];
 
+        if (!empty($_GET['theme']))
+            if ($_GET['theme'] == 'light' || $_GET['theme'] == 'dark') {
+                $_SESSION['theme'] = $_GET['theme'];
+                $this->app['theme'] = $_GET['theme'];
+            }
 
         $controllerName = '\\controllers\\' . ucfirst($moduleName) . 'Controller';
         $controllerActionName = $actionName . 'Action';
@@ -82,7 +85,7 @@ class Core
                     $statusCode = $actionResult->code;
 
                 $this->app['actionResult'] = $actionResult;
-                $this->app['pageTitle'] = 'Raccoons Courses - ' . ucfirst($actionName);
+                $this->app['pageTitle'] = 'Raccoons Courses - ' . ucfirst($moduleName);
             } else {
                 $statusCode = 404;
             }

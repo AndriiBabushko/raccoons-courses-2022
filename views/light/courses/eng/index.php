@@ -81,10 +81,10 @@ if (User::isUserAuth())
                     <?php foreach ($goods as $good): ?>
                         <div class="col">
                             <div class="card border-2">
-                                <?php if( $good['photo'] !== 'no_image.png'): ?>
-                                <img src="/static/img/courses/<?php echo $good['photo']; ?>" class="card-img-top" alt="<?php echo $good['photo']; ?>">
+                                <?php if ($good['photo'] !== 'no_image.png'): ?>
+                                    <img src="/static/img/courses/<?php echo $good['photo']; ?>" class="card-img-top" alt="<?php echo $good['photo']; ?>">
                                 <?php endif; ?>
-                                <?php if( $good['photo'] === 'no_image.png'): ?>
+                                <?php if ($good['photo'] === 'no_image.png'): ?>
                                     <img src="/static/img/<?php echo $good['photo']; ?>" class="card-img-top" alt="<?php echo $good['photo']; ?>">
                                 <?php endif; ?>
                                 <div class="card-body">
@@ -93,12 +93,13 @@ if (User::isUserAuth())
                                     <hr>
                                     <p class="card-text"><?php echo $good['short_description']; ?></p>
                                     <p class="card-text comments-count">
-                                        <?php if($good['comments_count'] == 0):?>
+                                        <?php if ($good['comments_count'] == 0): ?>
                                             No comments yet
                                         <?php endif; ?>
 
-                                        <?php if($good['comments_count'] != 0):?>
-                                            <span class="count"><?php echo $good['comments_count']; ?> </span> comments from users
+                                        <?php if ($good['comments_count'] != 0): ?>
+                                            <span class="count"><?php echo $good['comments_count']; ?></span>
+                                            <?php if ($good['comments_count'] == 1) echo "comment from user"; else echo "comments from users" ?>
                                         <?php endif; ?>
                                     </p>
                                     <?php if (!empty($user)): ?>

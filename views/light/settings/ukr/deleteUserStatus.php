@@ -10,5 +10,5 @@
     else
         echo '<div class="alert alert-danger my-2 w-100 text-center">Під час видалення користувача сталася помилка!</div>';
     ?>
-    <a href="/user/eng/register" class="btn btn-success mb-2" id="">Поверніться на сторінку реєстрації!</a>
+    <a href="/user/eng/register" class="btn btn-success mb-2" id="">Повернутися на сторінку реєстрації!</a>
 </div>

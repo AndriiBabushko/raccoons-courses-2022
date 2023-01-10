@@ -6,8 +6,9 @@
 
 $goodsTotalSum = 0;
 
-foreach ($goods as $good)
-    $goodsTotalSum += floatval($good['price']);
+if (!empty($goods))
+    foreach ($goods as $good)
+        $goodsTotalSum += floatval($good['price']);
 ?>
 
 <div class="container">
@@ -35,7 +36,12 @@ foreach ($goods as $good)
                             <tr>
                                 <th scope="row"><?php echo $good['id_good']; ?></th>
                                 <td><?php echo $good['name']; ?></td>
-                                <td><img src="/static/img/courses/<?php echo $good['photo']; ?>" class="img-thumbnail cart-img" alt="<?php echo $good['photo']; ?>"></td>
+                                <?php if ($good['photo'] == 'no_image.png'): ?>
+                                    <td><img src="/static/img/<?php echo $good['photo']; ?>" class="img-thumbnail cart-img" alt="<?php echo $good['photo']; ?>"></td>
+                                <?php endif; ?>
+                                <?php if ($good['photo'] != 'no_image.png'): ?>
+                                    <td><img src="/static/img/courses/<?php echo $good['photo']; ?>" class="img-thumbnail cart-img" alt="<?php echo $good['photo']; ?>"></td>
+                                <?php endif; ?>
                                 <td><?php echo $good['price']; ?> UAH</td>
                                 <td class="text-center">
                                     <a href="/cart/eng/delete?id_good=<?php echo $good['id_good'] ?>" class="btn btn-danger"><i class="bi bi-trash"></i></a>
@@ -68,7 +74,12 @@ foreach ($goods as $good)
                     <?php foreach ($goods as $good): ?>
                         <div class="col">
                             <div class="card border-2">
-                                <img src="/static/img/courses/<?php echo $good['photo']; ?>" class="card-img-top" alt="<?php echo $good['photo']; ?>">
+                                <?php if ($good['photo'] == 'no_image.png'): ?>
+                                    <td><img src="/static/img/<?php echo $good['photo']; ?>" class="img-thumbnail cart-img" alt="<?php echo $good['photo']; ?>"></td>
+                                <?php endif; ?>
+                                <?php if ($good['photo'] != 'no_image.png'): ?>
+                                    <td><img src="/static/img/courses/<?php echo $good['photo']; ?>" class="img-thumbnail cart-img" alt="<?php echo $good['photo']; ?>"></td>
+                                <?php endif; ?>
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $good['name']; ?></h5>
                                     <hr>

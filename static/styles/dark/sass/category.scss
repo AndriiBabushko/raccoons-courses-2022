@@ -1,0 +1,26 @@
+@import "variables", "mixins";
+
+// start category styles
+
+.card {
+  border-color: $post_black;
+  background-color: $post_black;
+  transition-duration: 0.5s;
+  z-index: 2!important;
+  color: white;
+  height: 100%;
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &:hover {
+    background-color: $light_black;
+    border-color: $light_grey;
+    transform: scale(0.95);
+  }
+}
+
+// end category styles

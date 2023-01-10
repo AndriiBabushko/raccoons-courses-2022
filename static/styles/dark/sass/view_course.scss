@@ -1,0 +1,87 @@
+@import "variables", "video";
+
+.view-video-menu {
+  border: 2px solid $post_black;
+  background-image: url('/static/img/form_pattern_6.jpg');
+  background-position: center;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.video-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.course-maker, {
+  color: white;
+
+  .course-maker-block {
+    border: 3px solid $post_black;
+    border-radius: 10px;
+  }
+
+  .course-maker-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid $post_black;
+    border-radius: 10px;
+
+    h3 {
+      margin: 5px 0;
+    }
+  }
+}
+
+.comments {
+  color: white;
+
+  .comment-block {
+    width: 100%;
+    padding: 16px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    border: 3px solid $post_black;
+    border-radius: 10px;
+
+    .comment-form-container {
+      width: 100%;
+
+      #comment {
+        min-height: 50px;
+      }
+    }
+
+    .comment {
+      border: 2px solid $post_black;
+      border-radius: 5px;
+    }
+  }
+
+  .comments-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid $post_black;
+    border-radius: 10px;
+
+    h3 {
+      margin: 5px 0;
+    }
+  }
+}
+
+#courseMakerImg {
+  border: 2px solid transparent;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
+  transition: all ease-in-out .3s;
+  width: 120px;
+  height: 120px;
+}

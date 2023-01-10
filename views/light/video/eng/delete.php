@@ -46,7 +46,7 @@
                             <label for="buttonDeleteVideo" id="labelDeleteVideo" class="form-label fs-5">Are you sure to delete video?</label>
                             <div class="d-flex flex-wrap justify-content-evenly w-100 mt-3">
                                 <button type='submit' id='buttonDeleteVideo' class='btn btn-danger'>Delete video</button>
-                                <a href="/courses/eng/view/<?php echo $id_good; ?>" id='buttonCancelDeleteVideo' class='btn btn-secondary'>Get back to courses page</a>
+                                <a href="/courses/eng/view/<?php echo $id_good; ?>" id='buttonCancelDeleteVideo' class='btn btn-secondary'>Get back to course view page</a>
                             </div>
                         </div>
                     <?php endif; ?>

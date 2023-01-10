@@ -70,6 +70,7 @@ video.addEventListener('timeupdate', () => {
 
 video.addEventListener('loadeddata', () => {
     totalTimeElem.textContent = formatTotalTime(video.duration);
+    console.log(formatTotalTime(video.duration));
 });
 
 const zeroFormatter = new Intl.NumberFormat(undefined, {

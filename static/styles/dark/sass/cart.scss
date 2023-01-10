@@ -1,0 +1,30 @@
+@import "variables";
+
+#cartTable {
+  vertical-align: middle;
+}
+
+.cart-img {
+  width: 300px;
+  height: auto;
+}
+
+@media (min-width: 0px) and (max-width: 768px) {
+  #cartTableRow {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  #cartCardsBlock {
+    display: none;
+  }
+
+  #cartBuyButtonBlock {
+    display: none;
+  }
+
+  #cartTotalSumBlock {
+    display: none;
+  }
+}

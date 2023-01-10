@@ -17,7 +17,7 @@ if (User::isUserAuth())
 <div class="settings_block">
     <div class="container-fluid">
         <form action="" method="post" enctype="multipart/form-data" id="accountForm" class="">
-            <div class="row flex-nowrap">
+            <div class="row flex-nowrap h-100">
                 <div class="col-auto col-md-3 col-xl-2 p-0" id="settingsMenu">
                     <div class="d-flex flex-column align-items-center align-items-sm-start">
                         <div class="w-100" id="userBlock">

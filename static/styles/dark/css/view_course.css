@@ -1,0 +1,274 @@
+.video-container {
+  width: 100%;
+  position: relative;
+  height: auto;
+  display: flex;
+  background-color: black;
+}
+.video-container .thumbnail-img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.video-container.scrubbing .thumbnail-img, .video-container.scrubbing .timeline:before {
+  display: block;
+}
+.video-container.scrubbing .thumb-indicator {
+  --scale: 1;
+}
+.video-container.scrubbing .timeline {
+  height: 100%;
+}
+.video-container:hover .video-controls-container {
+  opacity: 1;
+}
+.video-container.paused .video-controls-container {
+  opacity: 1;
+}
+.video-container.paused .pause-icon {
+  display: none;
+}
+.video-container:not(.paused) .play-icon {
+  display: none;
+}
+.video-container.full-screen .full-screen-open-icon {
+  display: none;
+}
+.video-container:not(.full-screen) .full-screen-exit-icon {
+  display: none;
+}
+.video-container:focus-within .video-controls-container {
+  opacity: 1;
+}
+.video-container.full-screen {
+  max-height: 100vh;
+  max-width: initial;
+  width: 100%;
+}
+.video-container .volume-up-icon, .video-container .volume-down-icon, .video-container .volume-mute-icon {
+  display: none;
+}
+.video-container[data-volume-level=up] .volume-up-icon {
+  display: block;
+}
+.video-container[data-volume-level=down] .volume-down-icon {
+  display: block;
+}
+.video-container[data-volume-level=mute] .volume-mute-icon {
+  display: block;
+}
+
+.video {
+  width: 100%;
+}
+
+.video-controls-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: white;
+  z-index: 500;
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+.video-controls-container:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+  width: 100%;
+  aspect-ratio: 6/1;
+  z-index: -1;
+  pointer-events: none;
+}
+.video-controls-container .controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem;
+}
+.video-controls-container .controls button {
+  overflow: hidden;
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 0;
+  height: 30px;
+  width: 30px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 150ms ease-in-out;
+}
+.video-controls-container .controls button.wide {
+  width: 50px;
+}
+.video-controls-container .controls button:hover {
+  opacity: 1;
+}
+.video-controls-container .controls button:focus {
+  outline: none;
+}
+.video-controls-container .controls .btn:focus {
+  border-color: #a1a1a1;
+  box-shadow: 0 0 0 0.2rem lightgrey;
+}
+
+.volume-container {
+  display: flex;
+  align-items: center;
+}
+.volume-container .volume-slider {
+  width: 0;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: width 150ms ease-in-out, transform 150ms ease-in-out;
+}
+.volume-container .volume-slider:focus-within {
+  width: 100px;
+  transform: scaleX(1);
+}
+.volume-container:hover .volume-slider {
+  width: 100px;
+  transform: scaleX(1);
+}
+
+.duration-container {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-grow: 1;
+}
+
+.timeline-container {
+  height: 7px;
+  margin-inline: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.timeline-container .timeline {
+  background-color: rgba(100, 100, 100, 0.75);
+  height: 3px;
+  width: 100%;
+  position: relative;
+}
+.timeline-container .timeline:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: calc(100% - var(--preview-position) * 100%);
+  background-color: rgb(150, 150, 150);
+  display: none;
+}
+.timeline-container .timeline:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: calc(100% - var(--progress-position) * 100%);
+  background-color: lightgrey;
+}
+.timeline-container .timeline .thumb-indicator {
+  --scale: 0;
+  position: absolute;
+  transform: translateX(-50%) scale(var(--scale));
+  height: 200%;
+  top: -50%;
+  left: calc(var(--progress-position) * 100%);
+  background-color: lightgrey;
+  border-radius: 50%;
+  transition: transform 150ms ease-in-out;
+  aspect-ratio: 1/1;
+}
+.timeline-container:hover .thumb-indicator {
+  --scale: 1;
+}
+.timeline-container:hover .timeline {
+  height: 100%;
+}
+.timeline-container:hover .timeline:before {
+  display: block;
+}
+
+.view-video-menu {
+  border-top: 2px solid lightgrey;
+  border-right: 2px solid lightgrey;
+  border-left: 2px solid lightgrey;
+  background-image: url("/static/img/form_pattern_2.jpg");
+  background-position: center;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.video-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.course-maker .course-maker-block {
+  border: 2px solid #a1a1a1;
+  border-radius: 10px;
+}
+.course-maker .course-maker-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #a1a1a1;
+  border-radius: 10px;
+}
+.course-maker .course-maker-title h3 {
+  margin: 5px 0;
+}
+
+.comments .comment-block {
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid #a1a1a1;
+  border-radius: 10px;
+}
+.comments .comment-block .comment-form-container {
+  width: 100%;
+}
+.comments .comment-block .comment-form-container #comment {
+  min-height: 50px;
+}
+.comments .comment-block .comment {
+  border: 1px solid #a1a1a1;
+  border-radius: 5px;
+}
+.comments .comments-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #a1a1a1;
+  border-radius: 10px;
+}
+.comments .comments-title h3 {
+  margin: 5px 0;
+}
+
+#courseMakerImg {
+  border: 2px solid transparent;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  transition: all ease-in-out 0.3s;
+  width: 120px;
+  height: 120px;
+}
+
+/*# sourceMappingURL=view_course.css.map */

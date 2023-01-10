@@ -1,0 +1,54 @@
+@import "variables", "mixins", "forms";
+
+#goodFormImg {
+  @include formImg;
+  background-image: url('/static/img/form_pattern_4.jpg');
+  filter: blur(1px);
+  -webkit-filter: blur(1px);
+}
+
+#goodAddForm, #goodUpdateForm, #goodDeleteForm {
+  @include formBlock;
+}
+
+#buttonAddGood, #buttonUpdateGood {
+  @include formButtonWidth;
+}
+
+@media (min-width: 0px) and (max-width: 576px) {
+  #goodAddForm, #goodUpdateForm, #goodDeleteForm {
+    @include mediaFormBlock0576;
+  }
+
+  #content {
+    @include mediaFormContent0576;
+  }
+
+  #categoryFormImg {
+    @include mediaFormImg0576
+  }
+
+  #buttonDeleteGood, #buttonCancelDeleteGood {
+    @include formButtonWidth;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  #goodAddForm, #goodUpdateForm, #goodDeleteForm {
+    @include mediaFormBlock576768;
+  }
+
+  #content {
+    @include mediaFormContent576768;
+  }
+
+  #buttonDeleteGood, #buttonCancelDeleteGood {
+    @include formButtonWidth;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  #buttonDeleteGood, #buttonCancelDeleteGood {
+    @include formButtonWidth;
+  }
+}

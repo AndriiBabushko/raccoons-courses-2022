@@ -11,7 +11,7 @@
   background-image:url('/static/img/site/light_programming_languages_pattern.png');
 }
 
-#authForm {
+#authForm, #registerForm {
   @include formBlock;
 }
 
@@ -20,7 +20,7 @@
 }
 
 @media (min-width: 0px) and (max-width: 576px) {
-  #registerForm {
+  #authForm, #registerForm {
     @include mediaFormBlock0576;
   }
 
@@ -34,7 +34,7 @@
 }
 
 @media (min-width: 576px) and (max-width: 768px) {
-  #registerForm {
+  #authForm, #registerForm {
     @include mediaFormBlock576768;
   }
 
@@ -42,13 +42,5 @@
     @include mediaFormContent576768;
   }
 }
-
-//@media (min-width: 768px) and (max-width: 992px) {
-//
-//}
-//
-//@media (min-width: 992px) and (max-width: 1200px) {
-//
-//}
 
 // end auth forms styles

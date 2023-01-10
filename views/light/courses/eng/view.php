@@ -247,5 +247,4 @@
     <?php endif; ?>
 </div>
 
-<script><?php require_once "static/js/videoPlayer.js"; ?></script>
-<script><?php require_once "static/js/videoPage.js"; ?></script>
+<script defer><?php require_once "static/js/videoPage.js"; ?></script>

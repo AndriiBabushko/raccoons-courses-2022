@@ -8,8 +8,6 @@
 
 #startBlockText {
   margin: 10px 0;
-  display: flex;
-  flex-direction: column;
 }
 
 #startBlockLogo {
@@ -28,16 +26,15 @@
 }
 
 #offeredGoodsBlockContainer {
-  width: 100%;
-  height: auto;
   margin: 0 5px;
 }
 
 .programming-languages-container {
   width: 100%;
-  display: flex;
+  display: inline-flex;
   cursor: grab;
   overflow-x: scroll;
+  transition: background-color 250ms ease-in-out;
 }
 .programming-languages-container::-webkit-scrollbar {
   height: 5px;
@@ -53,19 +50,15 @@
 }
 
 .programming-language-container {
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 100%;
-  width: 100px;
+  width: 50px;
   height: 100px;
   margin: 0 5px;
 }
 .programming-language-container i {
   font-size: 50px;
-}
-.programming-language-container :hover {
-  transition: all 3s ease-in-out;
 }
 
 @keyframes smooth-appearance {
@@ -74,6 +67,22 @@
   }
   100% {
     opacity: 100%;
+  }
+}
+@media (min-width: 0px) and (max-width: 576px) {
+  #logo {
+    width: 250px;
+    height: 250px;
+  }
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  .programming-languages-container {
+    width: 300px;
+  }
+}
+@media (min-width: 0px) and (max-width: 300px) {
+  .programming-languages-container {
+    width: 250px;
   }
 }
 .dropdown-item:focus {
@@ -164,6 +173,10 @@
   color: white !important;
 }
 
+.settings_block {
+  height: 100%;
+}
+
 #userAvatar {
   text-align: center;
 }
@@ -209,6 +222,10 @@
 }
 #figCaption i {
   font-size: 48px;
+}
+
+#accountForm {
+  height: 100%;
 }
 
 .settings-group {
@@ -317,7 +334,7 @@
   background-image: url("/static/img/site/light_programming_languages_pattern.png");
 }
 
-#authForm {
+#authForm, #registerForm {
   border: 3px solid #a1a1a1;
   border-radius: 25px;
   margin: 10px;
@@ -330,9 +347,8 @@
 }
 
 @media (min-width: 0px) and (max-width: 576px) {
-  #registerForm {
+  #authForm, #registerForm {
     width: 90%;
-    border-radius: 0;
   }
   #content {
     width: 85%;
@@ -343,9 +359,8 @@
   }
 }
 @media (min-width: 576px) and (max-width: 768px) {
-  #registerForm {
+  #authForm, #registerForm {
     width: 80%;
-    border-radius: 0;
   }
   #content {
     width: 95%;
@@ -353,9 +368,16 @@
 }
 .card {
   border-color: #a1a1a1;
+  background-color: white;
   transition-duration: 0.5s;
   color: black;
   z-index: 2 !important;
+  height: 100%;
+}
+.card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .card:hover {
   background-color: lightgrey;
@@ -420,7 +442,7 @@ textarea {
   -webkit-filter: blur(2px);
   z-index: 1;
   border-radius: 25px;
-  background-image: url("/static/img/category/form_pattern_2.jpg");
+  background-image: url("/static/img/form_pattern_2.jpg");
   filter: blur(1px);
   -webkit-filter: blur(1px);
 }
@@ -440,7 +462,6 @@ textarea {
 @media (min-width: 0px) and (max-width: 576px) {
   #categoryAddForm, #categoryUpdateForm, #categoryDeleteForm {
     width: 90%;
-    border-radius: 0;
   }
   #content {
     width: 85%;
@@ -457,7 +478,6 @@ textarea {
 @media (min-width: 576px) and (max-width: 768px) {
   #categoryAddForm, #categoryUpdateForm, #categoryDeleteForm {
     width: 80%;
-    border-radius: 0;
   }
   #content {
     width: 95%;
@@ -547,7 +567,7 @@ textarea {
   -webkit-filter: blur(2px);
   z-index: 1;
   border-radius: 25px;
-  background-image: url("/static/img/category/form_pattern_2.jpg");
+  background-image: url("/static/img/form_pattern_2.jpg");
   filter: blur(1px);
   -webkit-filter: blur(1px);
 }
@@ -567,7 +587,6 @@ textarea {
 @media (min-width: 0px) and (max-width: 576px) {
   #goodAddForm, #goodUpdateForm, #goodDeleteForm {
     width: 90%;
-    border-radius: 0;
   }
   #content {
     width: 85%;
@@ -584,7 +603,6 @@ textarea {
 @media (min-width: 576px) and (max-width: 768px) {
   #goodAddForm, #goodUpdateForm, #goodDeleteForm {
     width: 80%;
-    border-radius: 0;
   }
   #content {
     width: 95%;
@@ -657,10 +675,9 @@ textarea {
   -webkit-filter: blur(2px);
   z-index: 1;
   border-radius: 25px;
-  background-image: url("/static/img/category/form_pattern_2.jpg");
+  background-image: url("/static/img/form_pattern_2.jpg");
   filter: blur(1px);
   -webkit-filter: blur(1px);
-  z-index: -1;
 }
 
 #videoAddForm, #videoUpdateForm, #videoDeleteForm {
@@ -678,7 +695,6 @@ textarea {
 @media (min-width: 0px) and (max-width: 576px) {
   #videoAddForm, #videoUpdateForm, #videoDeleteForm {
     width: 90%;
-    border-radius: 0;
   }
   #content {
     width: 85%;
@@ -695,7 +711,6 @@ textarea {
 @media (min-width: 576px) and (max-width: 768px) {
   #videoAddForm, #videoUpdateForm, #videoDeleteForm {
     width: 80%;
-    border-radius: 0;
   }
   #content {
     width: 95%;
@@ -942,7 +957,7 @@ textarea {
   border-top: 2px solid lightgrey;
   border-right: 2px solid lightgrey;
   border-left: 2px solid lightgrey;
-  background-image: url("/static/img/category/form_pattern_2.jpg");
+  background-image: url("/static/img/form_pattern_2.jpg");
   background-position: center;
   width: 100%;
   height: auto;
@@ -1016,14 +1031,27 @@ textarea {
 }
 
 body {
-  overflow-x: hidden;
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.main {
+  height: 100%;
+  width: 100%;
+}
+.main .container, .main .container-fluid {
+  height: 100%;
 }
 
 .header {
+  min-height: 50px;
   background-color: lightgrey;
 }
 
 .footer {
+  min-height: 50px;
   background-color: lightgrey;
 }
 

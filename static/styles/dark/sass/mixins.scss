@@ -1,0 +1,71 @@
+@import "variables";
+
+@mixin formImg {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: block;
+  background-size: cover;
+  background-position: center;
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+  z-index: 1;
+  border-radius: 25px;
+}
+
+@mixin formBlock {
+  border: 3px solid $post_black;
+  border-radius: 25px;
+  margin: 10px;
+  width: 50%;
+}
+
+@mixin formButtonWidth {
+  width: 100%;
+  margin: 5px 0;
+}
+
+@mixin mediaFormBlock0576 {
+  width: 90%;
+}
+
+@mixin mediaFormContent0576 {
+  width: 85%;
+}
+
+@mixin mediaFormImg0576 {
+  filter: blur(1px);
+  -webkit-filter: blur(1px);
+}
+
+@mixin mediaFormBlock576768 {
+  width: 80%;
+}
+
+@mixin mediaFormContent576768 {
+  width: 95%;
+}
+
+@mixin horizontalBlockScrollBar {
+  width: 100%;
+  display: flex;
+  cursor: grab;
+  overflow-x: scroll;
+  transition: background-color 250ms ease-in-out;
+
+  &::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $light_black;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: white;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: $light_grey;
+  }
+}

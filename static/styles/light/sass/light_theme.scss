@@ -7,13 +7,30 @@
 }
 
 body {
-  overflow-x: hidden;
+  min-height: 100vh;
+  margin: 0;
+
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+
+  // overflow-x: hidden;
+}
+
+.main {
+  height: 100%;
+  width: 100%;
+
+  .container, .container-fluid {
+    height: 100%;
+  }
 }
 
 .header {
+  min-height:50px;
   background-color: $light_grey
 }
 
 .footer {
+  min-height:50px;
   background-color: $light_grey;
 }

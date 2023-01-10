@@ -1,0 +1,256 @@
+@import "variables";
+
+.video-container {
+  width: 100%;
+  position: relative;
+  height: auto;
+  display: flex;
+  background-color: black;
+
+  .thumbnail-img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+  }
+
+  &.scrubbing {
+    .thumbnail-img, .timeline:before{
+      display: block;
+    }
+
+    .thumb-indicator {
+      --scale: 1;
+    }
+
+    .timeline {
+      height: 100%;
+    }
+  }
+
+  &:hover {
+    .video-controls-container {
+      opacity: 1;
+    }
+  }
+
+  &.paused {
+    .video-controls-container {
+      opacity: 1;
+    }
+
+    .pause-icon {
+      display: none;
+    }
+  }
+
+  &:not(.paused) {
+    .play-icon {
+      display: none;
+    }
+  }
+
+  &.full-screen {
+    .full-screen-open-icon {
+      display: none;
+    }
+  }
+
+  &:not(.full-screen) {
+    .full-screen-exit-icon {
+      display: none;
+    }
+  }
+
+  &:focus-within {
+    .video-controls-container {
+      opacity: 1;
+    }
+  }
+
+  &.full-screen {
+    max-height: 100vh;
+    max-width: initial;
+    width: 100%;
+  }
+
+  .volume-up-icon, .volume-down-icon, .volume-mute-icon {
+    display: none;
+  }
+
+  &[data-volume-level="up"] .volume-up-icon {
+    display: block;
+  }
+
+  &[data-volume-level="down"] .volume-down-icon {
+    display: block;
+  }
+
+  &[data-volume-level="mute"] .volume-mute-icon {
+    display: block;
+  }
+}
+
+.video {
+  width: 100%;
+}
+
+.video-controls-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: white;
+  z-index: 500;
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+    width: 100%;
+    aspect-ratio: 6 / 1;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .25rem;
+
+    button {
+      overflow: hidden;
+      background: none;
+      border: none;
+      color: inherit;
+      padding: 0;
+      height: 30px;
+      width: 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      opacity: .85;
+      transition: opacity 150ms ease-in-out;
+
+      &.wide {
+        width: 50px;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .btn {
+      &:focus {
+        border-color: $post_black;
+        box-shadow: 0 0 0 0.2rem $light_black;
+      }
+    }
+  }
+}
+
+.volume-container {
+  display: flex;
+  align-items: center;
+
+  .volume-slider {
+    width: 0;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: width 150ms ease-in-out, transform 150ms ease-in-out;
+
+    &:focus-within {
+      width: 100px;
+      transform: scaleX(1);
+    }
+  }
+
+  &:hover {
+    .volume-slider {
+      width: 100px;
+      transform: scaleX(1);
+    }
+  }
+}
+
+.duration-container {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+  flex-grow: 1;
+}
+
+.timeline-container {
+  height: 7px;
+  margin-inline: .5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  .timeline {
+    background-color: rgba(100, 100, 100, .75);
+    height: 3px;
+    width: 100%;
+    position: relative;
+
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: calc(100% - var(--preview-position) * 100%);
+      background-color: rgb(150, 150, 150);
+      display: none;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: calc(100% - var(--progress-position) * 100%);
+      background-color: $light_black;
+    }
+
+    .thumb-indicator {
+      --scale: 0;
+      position: absolute;
+      transform: translateX(-50%) scale(var(--scale));
+      height: 200%;
+      top: -50%;
+      left: calc(var(--progress-position) * 100%);
+      background-color: $light_black;
+      border-radius: 50%;
+      transition: transform 150ms ease-in-out;
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  &:hover {
+    .thumb-indicator {
+      --scale: 1;
+    }
+
+    .timeline {
+      height: 100%;
+
+      &:before {
+        display: block;
+      }
+    }
+  }
+}

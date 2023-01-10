@@ -1,0 +1,176 @@
+@import "variables";
+
+// settings styles
+
+#settingsMenu {
+  border-right: 3px solid $light_black;
+}
+
+.settings-item, #userBlock {
+  border-bottom: 3px solid $light_black;
+}
+
+.nav-pills .nav-link {
+  border-radius: 0 !important;
+}
+
+.activeItem {
+  background-color: $light_black !important;
+  color: white !important;
+}
+
+// avatar input start
+
+#userAvatar {
+  text-align: center;
+
+  input[type="file"] {
+    display: none;
+  }
+}
+
+#userAvatarBlock {
+  position: relative;
+  margin: 10px;
+}
+
+#avatarImg {
+  cursor: pointer;
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  transition: all ease-in-out .3s;
+
+  :hover {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  }
+}
+
+#figCaption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0);
+  transition: all ease-in-out .3s;
+
+  &:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, .5);
+  }
+
+  i {
+    font-size: 48px;
+  }
+}
+
+// avatar input end
+
+.settings-group {
+  width: 45% !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.settings-link {
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+
+  &:hover {
+    background-color: $light_black;
+    color: white;
+  }
+}
+
+#appearanceSettingsMenu {
+  width: 100%;
+}
+
+#buttonGroup {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+#buttonUpdate {
+  margin-right: 5px;
+}
+
+#buttonDelete {
+  margin: 0 5px;
+}
+
+#buttonClear {
+  margin-left: 5px;
+}
+
+#textareaGroup, #buttonGroup {
+  width: 100% !important;
+}
+
+#textButtonLogout, #textLanguageDropdown {
+  width: 100% !important;
+}
+
+@media (min-width: 0px) and (max-width: 576px) {
+  #avatarImg {
+    width: 30px;
+    height: 30px;
+  }
+
+  #figCaption {
+    width: 30px;
+    height: 30px;
+
+    i {
+      font-size: 24px;
+    }
+  }
+
+  #contentContainer {
+    padding: 5px !important;
+  }
+
+  #buttonUpdate, #buttonClear, #buttonDelete, #buttonLogout {
+    width: 100% !important;
+    margin: 5px 0 !important;
+  }
+
+  .settings-group {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  #avatarImg {
+    width: 60px;
+    height: 60px;
+  }
+
+  #figCaption {
+    width: 60px;
+    height: 60px;
+
+    i {
+      font-size: 36px;
+    }
+  }
+
+  #buttonUpdate, #buttonClear, #buttonDelete, #buttonLogout {
+    width: 100% !important;
+    margin: 5px 0 !important;
+  }
+}
+
+// end settings styles

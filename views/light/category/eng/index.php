@@ -58,7 +58,7 @@ if (User::isUserAuth())
                     </button>
                 </div>
 
-                <h1 class="title fs-4 text-center pb-2 border-bottom border-2" id="categoryTitle">Category admin page</h1>
+                <h1 class="title fs-4 text-center pb-2 border-bottom border-2" id="categoryTitle">Out categories:</h1>
             </div>
 
             <?php if (!empty($user) && $user['is_admin'] === 1): ?>

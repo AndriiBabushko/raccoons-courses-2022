@@ -4,9 +4,17 @@
 
 .card {
   border-color: $post_grey;
+  background-color: white;
   transition-duration: 0.5s;
   color: black;
-  z-index: 2!important;
+  z-index: 2 !important;
+  height: 100%;
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
   &:hover {
     background-color: $light_grey;

@@ -27,7 +27,6 @@
 
 @mixin mediaFormBlock0576 {
   width: 90%;
-  border-radius: 0;
 }
 
 @mixin mediaFormContent0576 {
@@ -41,7 +40,6 @@
 
 @mixin mediaFormBlock576768{
   width: 80%;
-  border-radius: 0;
 }
 
 @mixin mediaFormContent576768{
@@ -50,9 +48,10 @@
 
 @mixin horizontalBlockScrollBar {
   width: 100%;
-  display: flex;
+  display: inline-flex;
   cursor: grab;
   overflow-x: scroll;
+  transition: background-color 250ms ease-in-out;
 
   &::-webkit-scrollbar {
     height: 5px;
