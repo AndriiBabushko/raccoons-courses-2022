@@ -90,6 +90,14 @@
   }
 }
 
+.dropdown-item {
+  transition: background-color 250ms ease-in-out;
+
+  &:hover {
+    background-color: $post_black;
+  }
+}
+
 #appearanceSettingsMenu {
   width: 100%;
 }

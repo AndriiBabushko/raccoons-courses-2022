@@ -243,6 +243,10 @@
   color: white;
 }
 
+.dropdown-item {
+  transition: background-color 250ms ease-in-out;
+}
+
 #appearanceSettingsMenu {
   width: 100%;
 }

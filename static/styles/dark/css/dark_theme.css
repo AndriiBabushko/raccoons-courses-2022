@@ -242,6 +242,13 @@
   color: white;
 }
 
+.dropdown-item {
+  transition: background-color 250ms ease-in-out;
+}
+.dropdown-item:hover {
+  background-color: #171b1f;
+}
+
 #appearanceSettingsMenu {
   width: 100%;
 }
