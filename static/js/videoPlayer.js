@@ -73,6 +73,10 @@ video.addEventListener('loadeddata', () => {
     console.log(formatTotalTime(video.duration));
 });
 
+document.addEventListener('loadeddata', () => {
+    totalTimeElem.textContent = formatTotalTime(video.duration);
+})
+
 const zeroFormatter = new Intl.NumberFormat(undefined, {
     minimumIntegerDigits: 2
 });
