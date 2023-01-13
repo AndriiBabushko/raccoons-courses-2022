@@ -475,3 +475,4 @@ composer.lock
 
 DatabaseScheme.xlsx
 ~$DatabaseScheme.xlsx
+/static/videos
