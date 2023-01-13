@@ -141,8 +141,8 @@ if (User::isUserAuth())
                                 </div>
 
                                 <div class="settings-group" id="buttonGroup">
-                                    <button class="btn btn-primary btn-outline-light" id="buttonUpdate" type="submit">Оновити профіль</button>
-                                    <a class="btn btn-danger btn-outline-light" id="buttonDelete" href="/settings/ukr/deleteUser">Видалити профіль</a>
+                                    <button class="btn btn-primary" id="buttonUpdate" type="submit">Оновити профіль</button>
+                                    <a class="btn btn-danger" id="buttonDelete" href="/settings/ukr/deleteUser">Видалити профіль</a>
                                     <button class="btn btn-secondary" id="buttonClear" type="button">Очистити поля</button>
                                 </div>
                             </div>

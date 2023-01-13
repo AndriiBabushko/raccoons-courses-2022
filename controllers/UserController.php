@@ -42,7 +42,7 @@ class UserController extends Controller
             } else {
                 User::authUser($user);
 
-                $this->redirect('/');
+                $this->redirect("/site/$this->language/index");
             }
         }
 
@@ -87,6 +87,6 @@ class UserController extends Controller
     #[NoReturn] public function logoutAction()
     {
         User::logoutUser();
-        $this->redirect('/');
+        $this->redirect("/site/$this->language/index");
     }
 }

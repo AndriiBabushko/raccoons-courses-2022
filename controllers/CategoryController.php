@@ -78,7 +78,7 @@ class CategoryController extends Controller
             $id_category = $_GET['id_category'];
             $model = $_POST;
 
-            if (Utils::checkImgExtension($_FILES['photo']['name'])) {
+            if (empty($_FILES['photo']['name']) || Utils::checkImgExtension($_FILES['photo']['name'])) {
                 $updateCategoryStatus = Category::updateCategory($id_category, $model, $_FILES['photo']['tmp_name'], $_FILES['photo']['name']);
 
                 if ($updateCategoryStatus)

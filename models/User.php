@@ -29,7 +29,8 @@ class User
 
         $userPhotoName = self::getUserById($id_user)['avatar'];
         $userPhotoPath = "static/img/user/$userPhotoName";
-        if (file_exists($userPhotoPath) && $userPhotoName !== "no_image.png")
+
+        if (file_exists($userPhotoPath) && $userPhotoName !== $imgName && $imgName != "")
             unlink($userPhotoPath);
 
         if (!file_exists("static/img/user/$imgName")) {

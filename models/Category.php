@@ -23,7 +23,7 @@ class Category
     {
         $categoryPhotoName = self::getCategoryById($id_category)['photo'];
         $photoPath = "static/img/category/$categoryPhotoName";
-        if (file_exists($photoPath) && $categoryPhotoName !== "no_image.png")
+        if (file_exists($photoPath) && $categoryPhotoName !== $imgName && $imgName !== "")
             unlink($photoPath);
 
         if (!file_exists("static/img/category/$imgName")) {

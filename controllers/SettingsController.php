@@ -26,7 +26,7 @@ class SettingsController extends Controller
             if(!User::isUserExistWithEmail($_POST['email']) || $currentUser['email'] == $_POST['email']) {
                 $id_user = $currentUser['id_user'];
 
-                if (empty($_FILES['photo']['name']) && empty($_FILES['photo']['tmp_name'])) {
+                if (empty($_FILES['avatar']['name']) && empty($_FILES['avatar']['tmp_name'])) {
                     $updateStatus = User::updateUser($id_user, $model);
                 } else {
                     if (Utils::checkImgExtension($_FILES['avatar']['name'])) {

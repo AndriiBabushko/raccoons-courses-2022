@@ -141,8 +141,8 @@ if (User::isUserAuth())
                                 </div>
 
                                 <div class="settings-group" id="buttonGroup">
-                                    <button class="btn btn-primary btn-outline-light" id="buttonUpdate" type="submit">Update user</button>
-                                    <a class="btn btn-danger btn-outline-light" id="buttonDelete" href="/settings/eng/deleteUser">Delete user</a>
+                                    <button class="btn btn-primary" id="buttonUpdate" type="submit">Update user</button>
+                                    <a class="btn btn-danger" id="buttonDelete" href="/settings/eng/deleteUser">Delete user</a>
                                     <button class="btn btn-secondary" id="buttonClear" type="button">Clear fields</button>
                                 </div>
                             </div>

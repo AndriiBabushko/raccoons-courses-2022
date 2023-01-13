@@ -23,7 +23,7 @@ class Good
     {
         $goodPhotoName = self::getGoodById($id_good)['photo'];
         $photoPath = "static/img/courses/$goodPhotoName";
-        if (file_exists($photoPath) && $goodPhotoName !== "no_image.png")
+        if (file_exists($photoPath) && $goodPhotoName !== $imgName && $imgName !== "")
             unlink($photoPath);
 
         if (!file_exists("static/img/category/$imgName")) {
